@@ -20,26 +20,62 @@ namespace Modelo
         #region Singleton
         private static _dataAccess _Instance = null;
 
-        public static _dataAccess GetInstance()
+        public static _dataAccess GetInstance
         {
-            if(_Instance == null)
+            get
             {
-                _Instance = new Modelo._dataAccess();
+                if (_Instance == null)
+                {
+                    _Instance = new Modelo._dataAccess();
+                }
+                return _Instance;
             }
-            return _Instance;
         }
-
         private _dataAccess()
         {
             //nothing
         }
 
-        
+
 
         #endregion
 
         #region Methods
+        public void Open()
+        {
+            try
+            {
+                CN.Open();
+            }
+            catch
+            {
+                throw;
+            }
+        }
 
+        public void Close()
+        {
+            try
+            {
+                CN.Close();
+                GC.Collect();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public int ExecSP(SqlCommand CMD)
+        {
+            int n;
+            Open();
+            CMD.Connection = CN;
+            CMD.CommandType = CommandType.StoredProcedure;
+            n = CMD.ExecuteNonQuery();
+            Close();
+            return n;
+        }
         #endregion
     }
 }

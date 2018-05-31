@@ -8,5 +8,10 @@ namespace Negocio
 {
     public class _User
     {
+        #region Constructors
+        private _User() { 
+        #endregion
+
+
     }
 }
