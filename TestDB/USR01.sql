@@ -1,10 +1,10 @@
 ﻿/****************************************************************************************/
 /****************************		 TABLA USUARIOS		   ******************************/
 /****************************************************************************************/
-CREATE TABLE USR01(
+ALTER TABLE USR01(
 -- DATOS DE SESIÓN
-USRNAME		CHAR(11)	PRIMARY KEY		NOT NULL, --NOMBRE DE USUARIO
-USPASS		CHAR(50)					NOT NULL, --CONTRASEÑA
+USRNAME		CHAR(50)	PRIMARY KEY		NOT NULL, --NOMBRE DE USUARIO
+USPASS		CHAR(32)					NOT NULL, --CONTRASEÑA
 -- DATOS DEL USUARIO
 FNAME		CHAR(50)					NOT NULL, --NOMBRES
 LNAME		CHAR(50)					NOT NULL, --APELLIDOS
