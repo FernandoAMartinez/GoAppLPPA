@@ -20,8 +20,8 @@ namespace Negocio
         {
             s_Usu = User;
             s_Pass = Seguridad.GetInstance.GetMD5(Pass);
-            i_logued = LoginStatus(User);
-            i_blocked = BlockedStatus(User);
+            s_logued = LoginStatus(User);
+            s_blocked = BlockedStatus(User);
             i_tries = TriesStatus(User);
         }
         #endregion
@@ -44,20 +44,20 @@ namespace Negocio
             set { s_Pass = value; }
         }
 
-        private int i_logued;
+        private string s_logued;
 
-        public int Logued
+        public string Logued
         {
-            get { return i_logued; }
-            set { i_logued = value; }
+            get { return s_logued; }
+            set { s_logued = value; }
         }
 
-        private int i_blocked;
+        private string s_blocked;
 
-        public int Blocked
+        public string Blocked
         {
-            get { return i_blocked; }
-            set { i_blocked = value; }
+            get { return s_blocked; }
+            set { s_blocked = value; }
         }
 
         private int i_tries;
@@ -67,14 +67,6 @@ namespace Negocio
             get { return i_tries; }
             set { i_tries = value; }
         }
-
-        private string s_Ambiente;                      //Modificado 26.04.2018
-
-        public string Ambient
-        {
-            get { return s_Ambiente; }
-            set { s_Ambiente = value; }
-        }                       //Modificado 26.04.2018
 
         /** ** ** ** ** ** ** ** ** ** ** ** ** Properties ** ** ** ** ** ** ** ** ** ** ** ** **/
         #endregion
@@ -93,37 +85,38 @@ namespace Negocio
             return n;
         }
 
-        public int BlockedStatus(string usu)
+        public string BlockedStatus(string usu)
         {
-            string query = "SELECT Blocked FROM USR01 WHERE Username='" + usu + "'";
-            n = dataAccess.GetInstance.ExeScalarInt(query);
+            string n;
+            string query = "SELECT ISBLOCKED FROM USR01 WHERE USRNAME='" + usu + "'";
+            n = (string)dataAccess.GetInstance.ExeScalarString(query);
             return n;
         }
 
         public int TriesStatus(string usu)
         {
-            string query = "SELECT Tries FROM USR01 WHERE Username='" + usu + "'";
+            string query = "SELECT USTRIES FROM USR01 WHERE USRNAME='" + usu + "'";
             n = dataAccess.GetInstance.ExeScalarInt(query);
             return n;
         }
 
-        public int LogInLogOut(int Op, string Usu)
+        public int LogInLogOut(string Op, string Usu)
         {
 
             string query;
 
-            if (Op == 1)
+            if (Op == "X")
             {
-                query = "UPDATE USR01 SET LogedIn = 1 WHERE Username='" + Usu + "'";
+                query = "UPDATE USR01 SET ISLOGUED = 1 WHERE USRNAME='" + Usu + "'";
                 n = dataAccess.GetInstance.ExeNonQuery(query);
-                i_logued = Op;
+                s_logued = Op;
 
             }
-            else if (Op == 0)
+            else if (Op == " ")
             {
-                query = "UPDATE USR01 SET LogedIn = 0 WHERE Username='" + Usu + "'";
+                query = "UPDATE USR01 SET ISLOGUED = 0 WHERE USRNAME='" + Usu + "'";
                 n = dataAccess.GetInstance.ExeNonQuery(query);
-                i_logued = Op;
+                s_logued = Op;
 
             }
 
@@ -158,7 +151,7 @@ namespace Negocio
             string query;
             DataView DW = new DataView();
             DataSet DS = new DataSet();
-            query = "SELECT Username, Pass, Tries, Blocked, LogedIn FROM USR01 WHERE USERNAME='" + Usu + "'";
+            query = "SELECT USRNAME, USPASS, USTRIES, ISBLOCKED, ISLOGUED FROM USR01 WHERE USRNAME='" + Usu + "'";
             //query = "SELECT TOP " + Rows + " * FROM [" + Table + "]";
             DS = dataAccess.GetInstance.ExecDS(query);
             //            DW.Table = DS.Tables.Add(Table);
@@ -172,10 +165,11 @@ namespace Negocio
             return n;
         }
 
-        public int LoginStatus(string Usu)
+        public string LoginStatus(string Usu)
         {
-            string query = "SELECT LogedIn FROM USR01 WHERE Username='" + Usu + "'";
-            n = dataAccess.GetInstance.ExeScalarInt(query);
+            string n;
+            string query = "SELECT ISLOGUED FROM USR01 WHERE USRNAME='" + Usu + "'";
+            n = (string)dataAccess.GetInstance.ExeScalarString(query);
             return n;
         }
 
@@ -189,7 +183,7 @@ namespace Negocio
 
         public int Exists(string Usu)
         {
-            n = dataAccess.GetInstance.ExeScalarInt("SELECT COUNT(*) FROM USR01 WHERE Username='" + Usu + "'");
+            n = dataAccess.GetInstance.ExeScalarInt("SELECT COUNT(*) FROM USR01 WHERE USRNAME='" + Usu + "'");
             return n;
         }
         #endregion
