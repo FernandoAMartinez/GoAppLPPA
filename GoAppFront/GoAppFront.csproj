@@ -421,9 +421,9 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Negocio\Negocio.csproj">
-      <Project>{064469ec-6a9d-4530-a8fa-6effef3656c8}</Project>
-      <Name>Negocio</Name>
+    <ProjectReference Include="..\NegocioService\NegocioService.csproj">
+      <Project>{aac8a783-3c35-4dfc-b092-c66e332c11cb}</Project>
+      <Name>NegocioService</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

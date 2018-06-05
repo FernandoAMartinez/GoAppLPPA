@@ -1,152 +1,175 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
-using System.Data.Sql;
 using System.Data.SqlClient;
 using System.Configuration;
 
 namespace Modelo
 {
-    public class dataAccess
+    public class DataAccess
     {
-        #region Objects
-        SqlConnection CN = new SqlConnection(ConfigurationManager.ConnectionStrings["TEST"].ConnectionString);
-        SqlCommand CMD = new SqlCommand();
-        SqlDataAdapter DA = new SqlDataAdapter();
-        #endregion
+        private SqlConnection cnn;
+        private SqlTransaction tx;
 
-        #region Singleton
-        private static dataAccess _Instance = null;
+        private static DataAccess instance;
 
-        public static dataAccess GetInstance
+        private DataAccess()
+        {
+        }
+
+        public static DataAccess Instance
         {
             get
             {
-                if (_Instance == null)
+                if (instance == null)
                 {
-                    _Instance = new Modelo.dataAccess();
+                    instance = new DataAccess();
                 }
-                return _Instance;
+                return instance;
             }
         }
-        private dataAccess()
-        {
-            //nothing
-        }
 
+        #region Method Connection
 
-
-        #endregion
-
-        #region Methods
-        public void Open()
+        private void Open()
         {
             try
             {
-                CN.Open();
+                cnn = new SqlConnection(ConfigurationManager.ConnectionStrings["TEST"].ConnectionString);
+                cnn.Open();
             }
-            catch
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 
-        public void Close()
+        private void Close()
         {
             try
             {
-                CN.Close();
+                cnn.Close();
+                cnn = null;
                 GC.Collect();
             }
-            catch
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 
-        public int ExecSP(SqlCommand CMD)
-        {
-            int n;
-            Open();
-            CMD.Connection = CN;
-            CMD.CommandType = CommandType.StoredProcedure;
-            n = CMD.ExecuteNonQuery();
-            Close();
-            return n;
-        }
+        #endregion
 
-        public int ExeNonQuery(string query)
-        {
-            int n;
-            Open();
-            CMD.Connection = CN;
-            CMD.CommandType = CommandType.Text;
-            CMD.CommandText = query;
-            n = CMD.ExecuteNonQuery();
-            Close();
-            return n;
-        }
+        #region Method Access
 
-        public int ExeScalarInt(string query)
+        public DataTable Read(string store, SqlParameter[] param = null)
         {
-            int n;
-            object obj;
+            DataTable tabla = new DataTable();
+            SqlDataAdapter adapter = new SqlDataAdapter();
             Open();
-            CMD.Connection = CN;
-            CMD.CommandType = CommandType.Text;
-            CMD.CommandText = query;
-            obj = CMD.ExecuteScalar();
-            Close();
-            n = Convert.ToInt32(obj);
-            return n;
-        }
-
-        public string ExeScalarString(string query)
-        {
-            string n;
-            object obj;
-            Open();
-            CMD.Connection = CN;
-            CMD.CommandType = CommandType.Text;
-            CMD.CommandText = query;
-            obj = CMD.ExecuteScalar();
-            Close();
-            n = obj.ToString();
-            return n;
-        }
-
-        public DataSet ExecDS(string query)
-        {
-            Open();
-            SqlDataAdapter DA = new SqlDataAdapter(query, CN);
-            DataSet DS = new DataSet();
-            DA.Fill(DS);
-            DS.Dispose();
-            Close();
-            return DS;
-        }
-
-        SqlDataReader DR;
-
-        public string ExecDR(string query)
-        {
-            string res = "";
-            Open();
-            CMD.Connection = CN;
-            CMD.CommandType = CommandType.Text;
-            CMD.CommandText = query;
-            DR = CMD.ExecuteReader();
-            while (DR.Read() == true)
+            adapter.SelectCommand = new SqlCommand();
+            adapter.SelectCommand.CommandText = store;
+            adapter.SelectCommand.CommandType = CommandType.Text;
+            if (param != null)
             {
-                //res = DR.ToString();
-                res = DR.GetString(0);
+                adapter.SelectCommand.Parameters.AddRange(param);
             }
+            adapter.SelectCommand.Connection = cnn;
+            adapter.Fill(tabla);
             Close();
-            return res;
+            return tabla;
+        }
+
+        public int Write(string store, SqlParameter[] param)
+        {
+            int retorno;
+            SqlCommand command = new SqlCommand();
+            Open();
+            command.CommandText = store;
+            command.CommandType = CommandType.Text;
+            command.Connection = cnn;
+            command.Parameters.AddRange(param);
+            tx = cnn.BeginTransaction();
+            command.Transaction = tx;
+            try
+            {
+                retorno = command.ExecuteNonQuery();
+                tx.Commit();
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                retorno = -1;
+                tx.Rollback();
+                return retorno;
+            }
+            finally
+            {
+                Close();
+            }
+
+        }
+
+        #endregion
+
+        #region Create Parameter
+        public SqlParameter CreateParameter(string name, string value)
+        {
+            SqlParameter param = new SqlParameter(name, value);
+            param.SqlDbType = SqlDbType.NVarChar;
+            return param;
+        }
+
+        public SqlParameter CreateParameter(string name, int value)
+        {
+            SqlParameter param = new SqlParameter(name, value);
+            param.SqlDbType = SqlDbType.Int;
+            return param;
+        }
+
+        public SqlParameter CreateParameter(string name, long value)
+        {
+            SqlParameter param = new SqlParameter(name, value);
+            param.SqlDbType = SqlDbType.Int;
+            return param;
+        }
+
+        public SqlParameter CreateParameter(string name, bool value)
+        {
+            SqlParameter param = new SqlParameter(name, value);
+            param.SqlDbType = SqlDbType.Bit;
+            return param;
+        }
+
+        public SqlParameter CreateParameter(string name, DateTime value)
+        {
+            SqlParameter param = new SqlParameter(name, value);
+            param.SqlDbType = SqlDbType.Date;
+            return param;
+        }
+
+        public SqlParameter CreateParameter(string name, Double value)
+        {
+            SqlParameter param = new SqlParameter(name, value);
+            param.SqlDbType = SqlDbType.Decimal;
+            return param;
+        }
+
+        public SqlParameter CreateParameter(string name, Decimal value)
+        {
+            SqlParameter param = new SqlParameter(name, value);
+            param.SqlDbType = SqlDbType.Decimal;
+            return param;
+        }
+
+        public SqlParameter CreateParameter(string name)
+        {
+            SqlParameter param = new SqlParameter();
+            param.ParameterName = name;
+            param.SqlDbType = SqlDbType.BigInt;
+            param.SqlValue = DBNull.Value;
+            return param;
         }
         #endregion
+
     }
 }

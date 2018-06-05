@@ -17,7 +17,16 @@ namespace GoAppFront
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            iniciarSesión(sender, e);
+            //iniciarSesión(sender, e);
+            string User = tbUser.Text;
+            string Password = tbPassword.Text;
+            Usuario US = new Usuario(User, Password);
+            if (US.LoginValidate(US.UserName, US.Password) == -1)
+            {
+                Session["Usuario"] = US;
+                Response.Redirect("Default.aspx");
+            }
+
         }
 
         private void iniciarSesión(object sender, EventArgs e)
@@ -28,16 +37,16 @@ namespace GoAppFront
             try
             {
 
-                clsUser US = new clsUser(User, Password);
-                string Username = US.Usu;
+                Usuario US = new Usuario(User, Password);
+                string Username = US.UserName;
 
-                if (US.Exists(US.Usu) == 0)
+                if (US.Exists(US.UserName) == 0)
                 {
                     string message = "Usuario incorrecto.";
                     Response.Write("<script> language='JaveScript'> alert('"+message+"')</script>");
                     //#region Bitacora
                     //clsBitacora BIT = new clsBitacora();
-                    //BIT.InsertBitacora(BIT.Next(), message, 1, "E", "L", US.Usu, Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd")), Convert.ToDateTime(DateTime.Now.ToString("HH:mm:ss")));
+                    //BIT.InsertBitacora(BIT.Next(), message, 1, "E", "L", US.UserName, Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd")), Convert.ToDateTime(DateTime.Now.ToString("HH:mm:ss")));
                     //#endregion
                     //#region MessageHandler
                     //Controller.Handlers.clsMessage c_Message = new Controller.Handlers.clsMessage();
@@ -46,14 +55,14 @@ namespace GoAppFront
                     ClearForm();
                     tbUser.Focus();
                 }
-                else if (US.Blocked == "X")
+                else if (US.IsBlocked == "X")
                 {
                     string message = "Su usuario se encuentra bloqueado. \nContacte a su administrador.";
                     Response.Write("<script> language='JaveScript'> alert('" + message + "')</script>");
 
                     //#region Bitacora
                     //clsBitacora BIT = new clsBitacora();
-                    //BIT.InsertBitacora(BIT.Next(), message, 2, "E", "L", US.Usu, Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd")), Convert.ToDateTime(DateTime.Now.ToString("HH:mm:ss")));
+                    //BIT.InsertBitacora(BIT.Next(), message, 2, "E", "L", US.UserName, Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd")), Convert.ToDateTime(DateTime.Now.ToString("HH:mm:ss")));
                     //#endregion
                     //#region MessageHandler
                     //Controller.Handlers.clsMessage c_Message = new Controller.Handlers.clsMessage();
@@ -68,7 +77,7 @@ namespace GoAppFront
                     Response.Write("<script> language='JaveScript'> alert('" + message + "')</script>");
                     //#region Bitacora
                     //clsBitacora BIT = new clsBitacora();
-                    //BIT.InsertBitacora(BIT.Next(), message, 3, "E", "L", US.Usu, Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd")), Convert.ToDateTime(DateTime.Now.ToString("HH:mm:ss")));
+                    //BIT.InsertBitacora(BIT.Next(), message, 3, "E", "L", US.UserName, Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd")), Convert.ToDateTime(DateTime.Now.ToString("HH:mm:ss")));
                     //#endregion
                     //#region MessageHandler
                     //Controller.Handlers.clsMessage c_Message = new Controller.Handlers.clsMessage();
@@ -77,20 +86,20 @@ namespace GoAppFront
                     ClearForm();
                     tbUser.Focus();
                 }
-                else if ((US.LoginValidate(US.Usu, US.Pass)) == -1)
+                else if ((US.LoginValidate(US.UserName, US.Password)) == -1)
                 {
-                    string message = "Bienvenido " + US.Usu + "!";
-                    US.LogInLogOut("X", US.Usu);
+                    string message = "Bienvenido " + US.UserName + "!";
+                    US.LogInLogOut("X", US.UserName);
                     Response.Write("<script> language='JaveScript'> alert('" + message + "')</script>");
                     //#region Bitacora
                     //clsBitacora BIT = new clsBitacora();
-                    //BIT.InsertBitacora(BIT.Next(), message, 1, "I", "L", US.Usu, Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd")), Convert.ToDateTime(DateTime.Now.ToString("HH:mm:ss")));
+                    //BIT.InsertBitacora(BIT.Next(), message, 1, "I", "L", US.UserName, Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd")), Convert.ToDateTime(DateTime.Now.ToString("HH:mm:ss")));
                     //#endregion
                     //#region MessageHandler
                     //Controller.Handlers.clsMessage c_Message = new Controller.Handlers.clsMessage();
                     //c_Message.MessageHandler(message, "I", "L");
                     //#endregion
-                    US.ResetTries(US.Usu);
+                    US.ResetTries(US.UserName);
                 }
                 else
                 {
@@ -98,7 +107,7 @@ namespace GoAppFront
                     Response.Write("<script> language='JaveScript'> alert('" + message + "')</script>");
                     //#region Bitacora 
                     //clsBitacora BIT = new clsBitacora();
-                    //BIT.InsertBitacora(BIT.Next(), message, 3, "E", "L", US.Usu, Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd")), Convert.ToDateTime(DateTime.Now.ToString("HH:mm:ss")));
+                    //BIT.InsertBitacora(BIT.Next(), message, 3, "E", "L", US.UserName, Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd")), Convert.ToDateTime(DateTime.Now.ToString("HH:mm:ss")));
                     //#endregion
                     //#region MessageHandler
                     //Controller.Handlers.clsMessage c_Message = new Controller.Handlers.clsMessage();
