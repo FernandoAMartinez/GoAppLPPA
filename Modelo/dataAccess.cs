@@ -112,56 +112,56 @@ namespace Modelo
         #endregion
 
         #region Create Parameter
-        public SqlParameter CreateParameter(string name, string value)
+        public static SqlParameter CreateParameter(string name, string value)
         {
             SqlParameter param = new SqlParameter(name, value);
             param.SqlDbType = SqlDbType.NVarChar;
             return param;
         }
 
-        public SqlParameter CreateParameter(string name, int value)
+        public static SqlParameter CreateParameter(string name, int value)
         {
             SqlParameter param = new SqlParameter(name, value);
             param.SqlDbType = SqlDbType.Int;
             return param;
         }
 
-        public SqlParameter CreateParameter(string name, long value)
+        public static SqlParameter CreateParameter(string name, long value)
         {
             SqlParameter param = new SqlParameter(name, value);
             param.SqlDbType = SqlDbType.Int;
             return param;
         }
 
-        public SqlParameter CreateParameter(string name, bool value)
+        public static SqlParameter CreateParameter(string name, bool value)
         {
             SqlParameter param = new SqlParameter(name, value);
             param.SqlDbType = SqlDbType.Bit;
             return param;
         }
 
-        public SqlParameter CreateParameter(string name, DateTime value)
+        public static SqlParameter CreateParameter(string name, DateTime value)
         {
             SqlParameter param = new SqlParameter(name, value);
             param.SqlDbType = SqlDbType.Date;
             return param;
         }
 
-        public SqlParameter CreateParameter(string name, Double value)
+        public static SqlParameter CreateParameter(string name, Double value)
         {
             SqlParameter param = new SqlParameter(name, value);
             param.SqlDbType = SqlDbType.Decimal;
             return param;
         }
 
-        public SqlParameter CreateParameter(string name, Decimal value)
+        public static SqlParameter CreateParameter(string name, Decimal value)
         {
             SqlParameter param = new SqlParameter(name, value);
             param.SqlDbType = SqlDbType.Decimal;
             return param;
         }
 
-        public SqlParameter CreateParameter(string name)
+        public static SqlParameter CreateParameter(string name)
         {
             SqlParameter param = new SqlParameter();
             param.ParameterName = name;
