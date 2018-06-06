@@ -1,4 +1,5 @@
 ﻿using Ambiente;
+using Modelo;
 using Negocio;
 using NegocioService.DTO;
 using System;
@@ -11,14 +12,25 @@ namespace NegocioService
 {
     public class UsuarioService
     {
-        public UsuarioDTO GetById(int id) {
+        //public UsuarioDTO GetById(int id) {
 
-        }
+        //}
 
-        public int SaveOrUpdate(UsuarioDTO dto)
-        {
+        //public int SaveOrUpdate(UsuarioDTO dto)
+        //{
 
 
+        //}
+
+
+        public UsuarioDTO GetByLogin(string user, string password) {
+            UsuarioDTO dto = null;
+
+            Usuario usuario = UsuarioDAL.GetByLogin(user, password);
+            if (usuario != null)
+                dto = ToDTO(usuario);
+
+            return dto;
         }
 
         private Usuario ToEntity(UsuarioDTO dto) {
@@ -29,6 +41,17 @@ namespace NegocioService
             usuario.IsBlocked = dto.IsBlocked;
             usuario.Tries = dto.Tries;
             return usuario;
+        }
+
+        private UsuarioDTO ToDTO(Usuario usuario)
+        {
+            UsuarioDTO dto = new UsuarioDTO();
+            dto.Password = usuario.Password;
+            dto.UserName = usuario.UserName;
+            dto.Id = usuario.Id;
+            dto.IsBlocked = usuario.IsBlocked;
+            dto.Tries = usuario.Tries;
+            return dto;
         }
     }   
     

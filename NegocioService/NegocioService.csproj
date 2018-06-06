@@ -45,6 +45,10 @@
     <Compile Include="UsuarioService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Ambiente\Ambiente.csproj">
+      <Project>{ABD5D1D2-2E2B-4D0B-8114-739831B29961}</Project>
+      <Name>Ambiente</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Modelo\BaseEntity.csproj">
       <Project>{4402845c-cfb5-4bd7-a9ca-f1a6dd94314d}</Project>
       <Name>BaseEntity</Name>

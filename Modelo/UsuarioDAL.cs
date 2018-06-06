@@ -1,6 +1,7 @@
 ﻿using Negocio;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -24,5 +25,31 @@ namespace Modelo
         }
 
 
+        public static Usuario GetByLogin(string UserName, string Password)
+        {
+            Usuario usuario = null;
+            DataTable table = DataAccess.Instance.Read("Usuario_Select", new SqlParameter[]{
+               DataAccess.CreateParameter("UserName", UserName),
+               DataAccess.CreateParameter("Password", Password)});
+
+            if (table.Rows.Count == 1)
+                usuario = Convert(table.Rows[0]);
+
+            return usuario;
+        }
+
+
+        private static Usuario Convert(DataRow row)
+        {
+            Usuario usuario = null;
+            if (row != null) {
+                usuario.Id = Int32.Parse(row[0].ToString());
+                usuario.UserName = row[1].ToString();
+                usuario.Password = row[2].ToString();
+                usuario.IsBlocked = Boolean.Parse(row[3].ToString());
+                usuario.Tries = Int32.Parse(row[0].ToString());
+            }
+            return usuario;
+        }
     }
 }
