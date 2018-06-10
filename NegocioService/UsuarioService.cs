@@ -51,6 +51,7 @@ namespace NegocioService
             dto.Id = usuario.Id;
             dto.IsBlocked = usuario.IsBlocked;
             dto.Tries = usuario.Tries;
+            dto.Perfil = new PerfilDTO(){ Id = usuario.Perfil.Id, Descripcion = usuario.Perfil.Descripcion }; 
             return dto;
         }
     }   

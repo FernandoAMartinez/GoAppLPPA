@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Modelo;
-using Ambiente;
-using System.Windows.Forms;
-using System.Data;
-
-namespace Negocio
+﻿namespace Negocio
 {
     public class Usuario
     {
-        int n;
         #region Constructors
         public Usuario() { }
 
@@ -67,120 +56,16 @@ namespace Negocio
             set { _tries = value; }
         }
 
-        #endregion
+        private Perfil _perfil;
 
-        #region Methods
-        public int LoginValidate(string Usu, string Pass)
+        public Perfil Perfil
         {
-            n = dataManipulation.GetInstance.usp_LoginValidation(Usu, Pass);
-            return n;
-        }
-
-        public int BlockUser(string Usu)
-        {
-            n = dataManipulation.GetInstance.usp_BlockUser(Usu);
-            return n;
-        }
-
-        public string BlockedStatus(string usu)
-        {
-            string n;
-            string query = "SELECT ISBLOCKED FROM USR01 WHERE USRNAME='" + usu + "'";
-            n = (string)DataAccess.GetInstance.ExeScalarString(query);
-            return n;
-        }
-
-        public int TriesStatus(string usu)
-        {
-            string query = "SELECT USTRIES FROM USR01 WHERE USRNAME='" + usu + "'";
-            n = DataAccess.GetInstance.ExeScalarInt(query);
-            return n;
-        }
-
-        public int LogInLogOut(string Op, string Usu)
-        {
-
-            string query;
-
-            if (Op == "X")
-            {
-                query = "UPDATE USR01 SET ISLOGUED = 1 WHERE USRNAME='" + Usu + "'";
-                n = DataAccess.GetInstance.ExeNonQuery(query);
-
-            }
-            else if (Op == " ")
-            {
-                query = "UPDATE USR01 SET ISLOGUED = 0 WHERE USRNAME='" + Usu + "'";
-                n = DataAccess.GetInstance.ExeNonQuery(query);
-            }
-
-            return n;
-        }
-
-        //public int BlockUser(string UserName)
-        //{
-        //    string query = "UPDATE USR01 SET IsBlocked = 1 WHERE Username='" + UserName + "'";
-        //    n = DA.ExeNonQuery(query);
-        //    return n;
-        //}
-
-        //public string GetDNI(string UserName)
-        //{
-        //    string n;
-        //    string query = "SELECT DNI FROM USR01 WHERE Username='" + UserName + "'";
-        //    n = DA.ExeNonQueryS(query);
-        //    return n;
-        //}
-
-        public int NewUser(string Usu, string Pass, int Tries, int Blocked, int Log)
-        {
-            int n;
-            string query = "INSERT INTO USR01 VALUES ('" + Usu + "','" + Seguridad.GetInstance.GetMD5(Pass).ToString() + "',3,0,0)";
-            n = DataAccess.GetInstance.ExeNonQuery(query);
-            return n;
-        }
-
-        public void ReturnRows(string Usu, DataGridView DataTable)
-        {
-            string query;
-            DataView DW = new DataView();
-            DataSet DS = new DataSet();
-            query = "SELECT USRNAME, USPASS, USTRIES, ISBLOCKED, ISLOGUED FROM USR01 WHERE USRNAME='" + Usu + "'";
-            //query = "SELECT TOP " + Rows + " * FROM [" + Table + "]";
-            DS = DataAccess.GetInstance.ExecDS(query);
-            //            DW.Table = DS.Tables.Add(Table);
-            DW.Table = DS.Tables["USR01"];
-            DataTable.DataSource = DW.Table;
-        }
-
-        public int ResetTries(string User)
-        {
-            n = dataManipulation.GetInstance.usp_ResetTries(User);
-            return n;
-        }
-
-        public string LoginStatus(string Usu)
-        {
-            string n;
-            string query = "SELECT ISLOGUED FROM USR01 WHERE USRNAME='" + Usu + "'";
-            n = (string)DataAccess.GetInstance.ExeScalarString(query);
-            return n;
-        }
-
-        //public string GetPSRNBR(string UserName)
-        //{
-        //    string res;
-        //    string query = "SELECT PSRNBR FROM USR01 WHERE Username='" + UserName + "'";
-        //    res = DA.ExeScalarString(query);
-        //    return res;
-        //}
-
-        public int Exists(string Usu)
-        {
-            n = DataAccess.GetInstance.ExeScalarInt("SELECT COUNT(*) FROM USR01 WHERE USRNAME='" + Usu + "'");
-            return n;
+            get { return _perfil; }
+            set { _perfil = value; }
         }
         #endregion
+
+
 
     }
 }

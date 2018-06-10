@@ -14,12 +14,13 @@ namespace Modelo
         
         public static int SaveOrUpdate(Usuario usuario) {
 
-           int ret = DataAccess.Instance.Write("Usuario_InsertOrUpdate",new SqlParameter[]{
+           int ret = DataAccess.Instance.Write("Usuario_InsertOrUpdate",CommandType.StoredProcedure,new SqlParameter[]{
                DataAccess.CreateParameter("UserName", usuario.UserName),
                DataAccess.CreateParameter("Password", usuario.Password),
                DataAccess.CreateParameter("IsBlocked", usuario.IsBlocked),
                DataAccess.CreateParameter("Tries", usuario.Tries),
-               DataAccess.CreateParameter("Id", usuario.Id)});
+               DataAccess.CreateParameter("Id", usuario.Id),
+               DataAccess.CreateParameter("Perfil_Id", usuario.Id)});
 
             return ret;
         }
@@ -28,7 +29,7 @@ namespace Modelo
         public static Usuario GetByLogin(string UserName, string Password)
         {
             Usuario usuario = null;
-            DataTable table = DataAccess.Instance.Read("Usuario_Select", new SqlParameter[]{
+            DataTable table = DataAccess.Instance.Read("Usuario_Select",CommandType.StoredProcedure ,new SqlParameter[]{
                DataAccess.CreateParameter("UserName", UserName),
                DataAccess.CreateParameter("Password", Password)});
 

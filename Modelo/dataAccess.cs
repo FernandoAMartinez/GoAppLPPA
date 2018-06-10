@@ -61,14 +61,14 @@ namespace Modelo
 
         #region Method Access
 
-        public DataTable Read(string store, SqlParameter[] param = null)
+        public DataTable Read(string store, CommandType type, SqlParameter[] param = null)
         {
             DataTable tabla = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter();
             Open();
             adapter.SelectCommand = new SqlCommand();
             adapter.SelectCommand.CommandText = store;
-            adapter.SelectCommand.CommandType = CommandType.Text;
+            adapter.SelectCommand.CommandType = type;
             if (param != null)
             {
                 adapter.SelectCommand.Parameters.AddRange(param);
@@ -79,13 +79,13 @@ namespace Modelo
             return tabla;
         }
 
-        public int Write(string store, SqlParameter[] param)
+        public int Write(string store, CommandType type, SqlParameter[] param)
         {
             int retorno;
             SqlCommand command = new SqlCommand();
             Open();
             command.CommandText = store;
-            command.CommandType = CommandType.Text;
+            command.CommandType = type;
             command.Connection = cnn;
             command.Parameters.AddRange(param);
             tx = cnn.BeginTransaction();

@@ -17,5 +17,7 @@ namespace NegocioService.DTO
         public bool IsBlocked { get; set; }
 
         public int Tries { get; set; }
+
+        public PerfilDTO Perfil { get; set; }
     }
 }
