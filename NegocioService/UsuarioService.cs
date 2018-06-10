@@ -1,12 +1,7 @@
-﻿using Ambiente;
-using Modelo;
+﻿using Modelo;
 using Negocio;
 using NegocioService.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NegocioService.Helper;
 
 namespace NegocioService
 {
@@ -16,20 +11,20 @@ namespace NegocioService
 
         //}
 
-        //public int SaveOrUpdate(UsuarioDTO dto)
-        //{
+        public int SaveOrUpdate(UsuarioDTO dto)
+        {
+            return UsuarioDAL.SaveOrUpdate(ToEntity(dto));
 
-
-        //}
+        }
 
 
         public UsuarioDTO GetByLogin(string user, string password) {
             UsuarioDTO dto = null;
 
-            Usuario usuario = UsuarioDAL.GetByLogin(user, password);
-            if (usuario != null)
+            Usuario usuario = UsuarioDAL.GetByLogin(user, Seguridad.GetInstance.GetMD5(password));
+            if (usuario != null) 
                 dto = ToDTO(usuario);
-
+           
             return dto;
         }
 

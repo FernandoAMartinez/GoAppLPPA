@@ -34,7 +34,7 @@ namespace Modelo
         {
             try
             {
-                cnn = new SqlConnection(ConfigurationManager.ConnectionStrings["TEST"].ConnectionString);
+                cnn = new SqlConnection(ConfigurationManager.ConnectionStrings["GoAppDB"].ConnectionString);
                 cnn.Open();
             }
             catch (Exception ex)

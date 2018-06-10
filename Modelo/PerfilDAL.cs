@@ -28,6 +28,7 @@ namespace Modelo
             Perfil perfil = null;
             if (row != null)
             {
+                perfil = new Perfil();
                 perfil.Id = Int32.Parse(row[0].ToString());
                 perfil.Descripcion = row[1].ToString();
             }

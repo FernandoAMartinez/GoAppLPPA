@@ -12,12 +12,12 @@
 <body>
   
     <div class="wrapper">
-        <form class="form-signin" method="post" >       
+        <form runat="server" class="form-signin" method="post" >       
             <h2 class="form-signin-heading">Please login</h2>
             <asp:TextBox runat="server"  CssClass="form-control" ID="txtUserName" ></asp:TextBox>
             <asp:TextBox runat="server" TextMode="Password" CssClass="form-control" ID="txtPassword" ></asp:TextBox>
             <div class="alert alert-danger" role="alert"><asp:Label ID="txtError" runat="server"></asp:Label></div>
-            <asp:Button runat="server" ID="btnLogin" Text="Login"/>   
+            <asp:Button class="btn btn-lg btn-primary btn-block" runat="server" ID="btnLogin" Text="Login" OnClick="btnLogin_Click"/>   
         </form>
     </div>
   

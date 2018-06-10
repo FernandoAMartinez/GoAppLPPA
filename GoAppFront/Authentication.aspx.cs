@@ -18,14 +18,27 @@ namespace GoAppFront
             }
         }
 
-        protected void Page_Load(object sender, EventArgs e)
-        {
+        private BitacoraService _bitacoraService;
 
+        public BitacoraService BitacoraService
+        {
+            get
+            {
+                if (_bitacoraService == null)
+                    _bitacoraService = new BitacoraService();
+
+                return _bitacoraService;
+            }
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            //iniciarSesión(sender, e);
+            //if(txtError.Text == null || string.IsNullOrWhiteSpace(txtError.Text))
+                
+        }
+
+        protected void btnLogin_Click(object sender, EventArgs e)
+        {
             string User = txtUserName.Text;
             string Password = txtPassword.Text;
             UsuarioDTO usuario = UsuarioService.GetByLogin(User, Password);
@@ -34,6 +47,8 @@ namespace GoAppFront
                 if (!usuario.IsBlocked && usuario.Tries < 3)
                 {
                     Session["Usuario"] = usuario;
+                    BitacoraService.Insert(new BitacoraDTO() { Accion = "LOGIN", Descripcion ="Se logueo al sistema el usuario " + usuario.UserName,
+                     Fecha = DateTime.Now, Usuario = usuario});
                     Response.Redirect("Default.aspx");
                 }
                 else
@@ -46,7 +61,6 @@ namespace GoAppFront
                 //Usuario o Contraseña Incorrectos o No Existen.
                 txtError.Text = "El Usuario o Contraseña son Incorrectos";
             }
-
         }
 
         private void ClearForm()
@@ -54,5 +68,7 @@ namespace GoAppFront
             txtUserName.Text = "";
             txtPassword.Text = "";
         }
+
+   
     }
 }

@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 using System.Security.Cryptography;
 
-namespace Ambiente
+namespace NegocioService.Helper
 {
     public class Seguridad
     {
@@ -51,7 +47,6 @@ namespace Ambiente
             Stream = c_MD5.ComputeHash(encoding.GetBytes(str));
             for (int i = 0; i < Stream.Length; i++) sb.AppendFormat("{0:x2}", Stream[i]);
             return sb.ToString();
-
         }
     }
 }

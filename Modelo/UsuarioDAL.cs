@@ -20,7 +20,7 @@ namespace Modelo
                DataAccess.CreateParameter("IsBlocked", usuario.IsBlocked),
                DataAccess.CreateParameter("Tries", usuario.Tries),
                DataAccess.CreateParameter("Id", usuario.Id),
-               DataAccess.CreateParameter("Perfil_Id", usuario.Id)});
+               DataAccess.CreateParameter("Perfil_Id", usuario.Perfil.Id)});
 
             return ret;
         }
@@ -39,16 +39,30 @@ namespace Modelo
             return usuario;
         }
 
+        public static Usuario GetById(int Id)
+        {
+            Usuario usuario = null;
+            DataTable table = DataAccess.Instance.Read("Usuario_Select", CommandType.StoredProcedure, new SqlParameter[]{
+               DataAccess.CreateParameter("Id", Id)});
+
+            if (table.Rows.Count == 1)
+                usuario = Convert(table.Rows[0]);
+
+            return usuario;
+        }
+
 
         private static Usuario Convert(DataRow row)
         {
             Usuario usuario = null;
             if (row != null) {
+                usuario = new Usuario();
                 usuario.Id = Int32.Parse(row[0].ToString());
                 usuario.UserName = row[1].ToString();
                 usuario.Password = row[2].ToString();
                 usuario.IsBlocked = Boolean.Parse(row[3].ToString());
-                usuario.Tries = Int32.Parse(row[0].ToString());
+                usuario.Tries = Int32.Parse(row[4].ToString());
+                usuario.Perfil = PerfilDAL.GetById(Int32.Parse(row[5].ToString()));
             }
             return usuario;
         }

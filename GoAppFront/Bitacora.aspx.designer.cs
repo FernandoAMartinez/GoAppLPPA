@@ -10,6 +10,6 @@
 namespace GoAppFront {
     
     
-    public partial class _Default {
+    public partial class Bitacora {
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using NegocioService;
+using NegocioService.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,8 +15,10 @@ namespace GoAppFront
         {
             if (Session["Usuario"] == null)
                 Response.Redirect("Authentication.aspx");
-        }
 
+            Session["Perfil"] = ((UsuarioDTO)Session["Usuario"]).Perfil.Id;
+            Session["PerfilDesc"] = ((UsuarioDTO)Session["Usuario"]).Perfil.Descripcion;
+        }
 
     }
 }
