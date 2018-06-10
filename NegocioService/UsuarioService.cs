@@ -20,7 +20,7 @@ namespace NegocioService
 
         public UsuarioDTO GetByLogin(string user, string password) {
             UsuarioDTO dto = null;
-
+            //Parte 3: Iniciar sesión con Credenciales ingresadas
             Usuario usuario = UsuarioDAL.GetByLogin(user, Seguridad.GetInstance.GetMD5(password));
             if (usuario != null) 
                 dto = ToDTO(usuario);

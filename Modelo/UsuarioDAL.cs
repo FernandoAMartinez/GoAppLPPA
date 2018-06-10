@@ -28,6 +28,7 @@ namespace Modelo
 
         public static Usuario GetByLogin(string UserName, string Password)
         {
+            //Parte 4: Asignar parámetros a Procedimiento Almacenado
             Usuario usuario = null;
             DataTable table = DataAccess.Instance.Read("Usuario_Select",CommandType.StoredProcedure ,new SqlParameter[]{
                DataAccess.CreateParameter("UserName", UserName),
