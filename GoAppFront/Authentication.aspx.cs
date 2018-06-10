@@ -91,6 +91,7 @@ namespace GoAppFront
                     //c_Message.MessageHandler(message, "I", "L");
                     //#endregion
                     US.ResetTries(US.Usu);
+                    Response.Redirect("Default.aspx");
                 }
                 else
                 {

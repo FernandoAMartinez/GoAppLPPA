@@ -6,11 +6,7 @@
 <head>
     <title></title>
     <style type="text/css">
-                .auto-style1 {
-            height: 140px;
-            margin-top: 34px;
-        }
-        /* The navigation bar */
+                /* The navigation bar */
                  .navbar {
                     overflow: hidden;
                     background-color: #333;
@@ -40,10 +36,28 @@
                     margin-top: 30px; /* Add a top margin to avoid content overlay */
                 }
         .auto-style2 {
-            height: 140px;
+            height: 206px;
             margin-top: 34px;
             width: 405px;
         }
+
+        .button {
+            background-color: #008cec; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+        .input[type=text] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+
     </style>
 </head>
 <body>
@@ -59,15 +73,18 @@
     <br />
     <form id="form1" runat="server">
         <div class="auto-style2">
-            <br />
+            <h1>Inicio de Sesión</h1>
             <!-- User -->
-            <asp:Label ID="Label1" runat="server" Text="Usuario: ">Usuario: </asp:Label> <asp:TextBox ID="tbUser" runat="server" Width="142px"></asp:TextBox>
+            <asp:Label ID="Label1" runat="server" Text="Usuario: " Height="19px" Width="83px"></asp:Label> <asp:TextBox ID="tbUser" runat="server" CssClass="input" Width="142px"></asp:TextBox>
+            <br />
             <br />
             <!-- Password -->
-            <asp:Label ID="Label2" runat="server" Text="Contraseña: ">Contraseña: </asp:Label> <asp:TextBox ID="tbPassword" runat="server" TextMode="Password"></asp:TextBox>
+            <asp:Label ID="Label2" runat="server" Text="Contraseña: ">Contraseña: </asp:Label> <asp:TextBox ID="tbPassword" runat="server" CssClass="input" TextMode="Password" Height="32px" Width="184px"></asp:TextBox>
+            <br />
             <br />
             <!-- Execute -->
-            <asp:Button ID="Button1" runat="server" Text="Iniciar Sesión" OnClick="Button1_Click" />
+            <asp:Button ID="Button1" runat="server" Text="Iniciar Sesión" CssClass="button" OnClick="Button1_Click" />
+
         </div>
         
     </form>
