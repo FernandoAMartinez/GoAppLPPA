@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-   <link rel="stylesheet" href="/Content/Home/bootstrap.min.css">
-    <link rel="stylesheet" href="/Content/Home/animate.css">
-    <link rel="stylesheet" href="/Content/Home/style.css">
+   <link rel="stylesheet" href="/Content/Home/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/Content/Home/animate.css"/>
+    <link rel="stylesheet" href="/Content/Home/style.css"/>
     <title>Inicio</title>
 </head>
 <body>

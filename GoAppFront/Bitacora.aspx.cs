@@ -27,7 +27,8 @@ namespace GoAppFront
         {
 
             List<BitacoraDTO> bitacoras = BitacoraService.GetAll();
-
+            dgBitacora.DataSource = bitacoras;
+            dgBitacora.DataBind();
         }
 
 

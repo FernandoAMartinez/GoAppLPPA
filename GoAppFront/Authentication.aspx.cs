@@ -51,7 +51,7 @@ namespace GoAppFront
                 if (!usuario.IsBlocked && usuario.Tries <= 3) 
                 Fin modificación */
 
-                if (usuario.IsBlocked == false && usuario.Tries <= 3)
+                if (usuario.IsBlocked == false && usuario.Tries > 0)
                 {
                     Session["Usuario"] = usuario;
                     BitacoraService.Insert(new BitacoraDTO() { Accion = "LOGIN", Descripcion ="Se logueo al sistema el usuario " + usuario.UserName,

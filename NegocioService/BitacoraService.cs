@@ -54,7 +54,7 @@ namespace NegocioService
                 dto.Accion = entity.Accion;
                 dto.Descripcion = entity.Descripcion;
                 dto.Fecha = entity.Fecha;
-                dto.Usuario = new UsuarioDTO() { Id = entity.Id, UserName = entity.Usuario.UserName };
+                dto.Usuario = new UsuarioDTO() { Id = entity.Id};
             }
             return dto;
         }
