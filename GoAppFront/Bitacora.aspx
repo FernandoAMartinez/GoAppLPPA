@@ -16,9 +16,17 @@
         }
         .auto-style1 {
             width:auto;
-            margin-top: 50px;
+            margin-top: 61px;
             margin-left:auto;
             margin-right:auto;
+        }
+        .auto-style2 {
+            margin-top: 47px;
+            font-family:Arial;
+            font-size:large;
+        }
+        .auto-style3 {
+            margin-top: 0
         }
     </style>
 </head>
@@ -98,21 +106,22 @@
        <%-- </div>--%>
         </article>
     </section>
+    <h1 class="auto-style2">Bitácora</h1>
         <div class="auto-style1">
-            <asp:DataGrid ID="dgBitacora" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None">
+            <asp:DataGrid ID="dgBitacora" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" CssClass="auto-style3">
                 <AlternatingItemStyle BackColor="White" />
                 <Columns>
                     <asp:BoundColumn DataField="Id" HeaderText="Bitacora" />
                     <asp:BoundColumn DataField="Accion" HeaderText="Accion" />
                     <asp:BoundColumn DataField="Descripcion" HeaderText="Descripcion" />
                     <asp:BoundColumn DataField="Fecha" HeaderText="Fecha" />
-                    <asp:BoundColumn DataField="Usuario" HeaderText="ID Usuario" />
+<%--                    <asp:BoundColumn DataField="Usuario.UserName" HeaderText="ID Usuario" />--%>
                 </Columns>
                 <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
                 <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
                 <ItemStyle BackColor="#FFFBD6" ForeColor="#333333" />
                 <PagerStyle BackColor="#FFCC66" ForeColor="#333333" HorizontalAlign="Center" />
-                <SelectedItemStyle BackColor="#FFCC66" Font-Bold="True" ForeColor="Navy" />
+<%--                <SelectedItemStyle BackColor="#FFCC66" Font-Bold="True" ForeColor="Navy" />--%>
             </asp:DataGrid>
         </div>
        </body>

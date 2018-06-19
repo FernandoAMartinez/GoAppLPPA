@@ -39,11 +39,11 @@ namespace GoAppFront
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            //Parte 1: Se completan los datos de inicio de sesión
+            //Parte 2: Se completan los datos de inicio de sesión
             string User = txtUserName.Text;
             string Password = txtPassword.Text;
 
-            //Parte 2: Se llama a la función de validación de inicio de sesión
+            //Parte 3: Se llama a la función de validación de inicio de sesión
             UsuarioDTO usuario = UsuarioService.GetByLogin(User, Password);
             if (usuario != null)
             {
@@ -53,11 +53,11 @@ namespace GoAppFront
 
                 if (usuario.IsBlocked == false && usuario.Tries > 0)
                 {
+                    //Parte 8: Creación de variable de sesión
                     Session["Usuario"] = usuario;
                     BitacoraService.Insert(new BitacoraDTO() { Accion = "LOGIN", Descripcion ="Se logueo al sistema el usuario " + usuario.UserName,
-                     Fecha = DateTime.Now, Usuario = usuario});
-
-                    //Parte N: Redireccionar a Página de Inicio
+                    Fecha = DateTime.Now, Usuario = usuario});
+                    //Redireccionar a Página de Inicio
                     Response.Redirect("Default.aspx");
                 }
                 else

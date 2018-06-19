@@ -28,7 +28,7 @@ namespace Modelo
 
         public static Usuario GetByLogin(string UserName, string Password)
         {
-            //Parte 4: Asignar parámetros a Procedimiento Almacenado
+            //Parte 5: Asignar parámetros a Procedimiento Almacenado y llamada
             Usuario usuario = null;
             DataTable table = DataAccess.Instance.Read("Usuario_Select",CommandType.StoredProcedure ,new SqlParameter[]{
                DataAccess.CreateParameter("UserName", UserName),
@@ -48,7 +48,7 @@ namespace Modelo
 
             if (table.Rows.Count == 1)
                 usuario = Convert(table.Rows[0]);
-
+             
             return usuario;
         }
 

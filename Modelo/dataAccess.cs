@@ -62,7 +62,7 @@ namespace Modelo
         #region Method Access
 
         public DataTable Read(string store, CommandType type, SqlParameter[] param = null)
-        {
+        { // Parte 6 - Login a- Llamada al StoredProcedure
             DataTable tabla = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter();
             Open();

@@ -21,6 +21,7 @@ namespace NegocioService
         public List<BitacoraDTO> GetAll() {
 
             List<BitacoraDTO> ret = new List<BitacoraDTO>();
+            // Parte 4 - Bitacora - LLamado a capa de Datos
             List<Bitacora> bitacoras = BitacoraDAL.GetAll();
             bitacoras.ForEach(b =>{
                 ret.Add(ToDTO(b));
@@ -44,7 +45,7 @@ namespace NegocioService
             return bitacora;
         }
 
-
+        //Parte 7 - Bitacora - Creación del objeto Bitácora
         private BitacoraDTO ToDTO(Bitacora entity) {
 
             BitacoraDTO dto = null;
@@ -54,7 +55,10 @@ namespace NegocioService
                 dto.Accion = entity.Accion;
                 dto.Descripcion = entity.Descripcion;
                 dto.Fecha = entity.Fecha;
-                dto.Usuario = new UsuarioDTO() { Id = entity.Id};
+                if (entity.Usuario != null)
+                {
+                    dto.Usuario = new UsuarioDTO() { Id = entity.Usuario.Id, UserName = entity.Usuario.UserName };
+                }else { dto.Usuario = new UsuarioDTO(); }
             }
             return dto;
         }

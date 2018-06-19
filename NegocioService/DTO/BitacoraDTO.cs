@@ -16,8 +16,8 @@ namespace NegocioService.DTO
         public string Descripcion { get; set; }
         
         public DateTime Fecha { get; set; }
-        
-        public UsuarioDTO Usuario { get; set; } 
 
+        public UsuarioDTO Usuario { get; set; } 
+        
     }
 }

@@ -43,13 +43,14 @@
 								<% if (((int)Session["Perfil"]) == 1)
                                     {
                                         Response.Write("<li role='presentation'><a href='Default.aspx' class='active'>Inicio</a></li>");
+                                        // Parte 1 - Bitacora - LLamado al formulario de bitácora
                                         Response.Write("<li role ='presentation' ><a href ='Bitacora.aspx'>Bitacora </a></li>");
                                         Response.Write("<li role ='presentation' ><a href ='#services'>Administradores </a></li>");
                                         Response.Write("<li role ='presentation' ><a href ='#contact'>Clientes </a></li>");
                                     }
                                     else if (((int)Session["Perfil"]) == 2)
                                     {
-                                       Response.Write("<li role='presentation'><a href='Default.aspx' class='active'>Inicio</a></li>");
+                                        Response.Write("<li role='presentation'><a href='Default.aspx' class='active'>Inicio</a></li>");
                                         Response.Write("<li role ='presentation' ><a href ='Bitacora.aspx'>Bitacora </a></li>");
                                         Response.Write("<li role ='presentation' ><a href ='#contact'>Clientes </a></li>");
                                     }

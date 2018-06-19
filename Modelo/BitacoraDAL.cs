@@ -27,6 +27,7 @@ namespace Modelo
         public static List<Bitacora> GetAll()
         {
             List<Bitacora> bitacoras = new List<Bitacora>();
+            // Parte 5 - Creacion de parametros 
             DataTable table = DataAccess.Instance.Read("Bitacora_Select", CommandType.StoredProcedure);
             foreach (DataRow row in table.Rows) {
                 bitacoras.Add(Convert(row));
