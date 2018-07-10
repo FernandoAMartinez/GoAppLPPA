@@ -171,5 +171,16 @@ namespace Modelo
         }
         #endregion
 
+        #region Bacup & Restore
+
+        public void Restore()
+        {
+
+        }
+
+        public void Backup() { }
+
+        #endregion
+
     }
 }

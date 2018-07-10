@@ -63,6 +63,9 @@
                                         Response.Write("<li role='presentation'><a href='Default.aspx' class='active'>Inicio</a></li>");
                                         Response.Write("<li role ='presentation' ><a href ='Bitacora.aspx'>Bitacora </a></li>");
                                         Response.Write("<li role ='presentation' ><a href ='#contact'>Clientes </a></li>");
+                                                                                // Agregado Backup Restore
+                                        Response.Write("<li role = 'presentation'><a href='Backup.aspx'> Backup </a></li>");
+                                        Response.Write("<li role = 'presentation'><a href='Restore.aspx'> Restore </a></li>");
                                     }
                                     else {
                                         Response.Write("<li role='presentation'><a href='Default.aspx' class='active'>Home</a></li>");

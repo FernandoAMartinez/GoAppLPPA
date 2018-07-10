@@ -16,10 +16,10 @@ namespace Modelo
         {
             int ret = 0;
             ret = DataAccess.Instance.Write("Bitacora_Insert", CommandType.StoredProcedure,new SqlParameter[]{
-               DataAccess.CreateParameter("Accion", bitacora.Accion),
-            DataAccess.CreateParameter("Descripcion", bitacora.Descripcion),
-            DataAccess.CreateParameter("Fecha", bitacora.Fecha),
-            DataAccess.CreateParameter("Usuario_Id", bitacora.Usuario.Id)});
+                DataAccess.CreateParameter("Accion", bitacora.Accion),
+                DataAccess.CreateParameter("Descripcion", bitacora.Descripcion),
+                DataAccess.CreateParameter("Fecha", bitacora.Fecha),
+                DataAccess.CreateParameter("Usuario_Id", bitacora.Usuario.Id)});
 
             return ret;
         }

@@ -48,5 +48,10 @@ namespace NegocioService.Helper
             for (int i = 0; i < Stream.Length; i++) sb.AppendFormat("{0:x2}", Stream[i]);
             return sb.ToString();
         }
+
+        public void PerformBackup(string path)
+        {
+            //algo
+        }
     }
 }
