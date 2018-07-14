@@ -90,11 +90,18 @@
             <article class="wrapper">
                 <div class="backup">
                     <br />
-                    <asp:Label runat="server" Text="Destino de Backup" ID="lblEstado"></asp:Label>
+                    <asp:Label runat="server" Text="Backup" ID="lblEstado"></asp:Label>
 <%--                    <asp:TextBox runat="server" ID="tbPath" CssClass="form-control"></asp:TextBox>--%>
-                    <asp:Button runat="server" Text="..." OnClick="Search_Click" class="btn btn-lg btn-primary btn-block"/>
+<%--                    <asp:Button runat="server" Text="..." OnClick="Search_Click" class="btn btn-lg btn-primary btn-block"/>--%>
                     <br />
                     <asp:Button runat="server" Text="Ejecutar Backup" OnClick="Backup_Click" class="btn btn-lg btn-primary btn-block"/>
+
+                    <br />
+                    <br />
+                    <br />
+                    <asp:Label runat="server" Text="Restore" ID="Label2"></asp:Label>
+                    <asp:Button runat="server" Text="Ejecutar Restore" OnClick="Restore_Click" class="btn btn-lg btn-primary btn-block"/>
+
                 </div>
             </article>
         </section>

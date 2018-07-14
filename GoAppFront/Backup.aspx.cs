@@ -22,14 +22,12 @@ namespace GoAppFront
         protected void Backup_Click(object sender, EventArgs e)
         {
             int ret = 0;
-            //string path = "N'" + @tbPath.Text + "'";
-            //        string path = tbPath.Text;
-            string path = "'" + ConfigurationManager.AppSettings["BackupDir"] + "'";
+            string path = ConfigurationManager.AppSettings["BackupDir"];
             SeguridadService Sec = new SeguridadService();
             try
             {
                 ret = Sec.PerformBackup(path);
-                if (ret == 0)
+                if (ret == -1)
                 {
                     UsuarioDTO user = (UsuarioDTO)Session["Usuario"];
                     BitacoraService service = new BitacoraService();
@@ -62,6 +60,48 @@ namespace GoAppFront
                 throw ex;
             }
             
+        }
+
+        protected void Restore_Click(object sender, EventArgs e)
+        {
+            int ret = 0;
+            string path = ConfigurationManager.AppSettings["BackupDir"];
+            SeguridadService Sec = new SeguridadService();
+            try
+            {
+                ret = Sec.PerformRestore(path);
+                if (ret == 0)
+                {
+                    UsuarioDTO user = (UsuarioDTO)Session["Usuario"];
+                    BitacoraService service = new BitacoraService();
+                    service.Insert(new BitacoraDTO()
+                    {
+                        Accion = "RESTORE",
+                        Descripcion = "El usuario " + user.UserName + " ejecutó el restore de la base de datos",
+                        Fecha = DateTime.Now,
+                        Usuario = user
+                    });
+                    lblEstado.Text = "Backup Efectuado";
+                }
+                else
+                {
+                    UsuarioDTO user = (UsuarioDTO)Session["Usuario"];
+                    BitacoraService service = new BitacoraService();
+                    service.Insert(new BitacoraDTO()
+                    {
+                        Accion = "BACKUP",
+                        Descripcion = "El backup de " + user.UserName + " no se ejecutó correctamente",
+                        Fecha = DateTime.Now,
+                        Usuario = user
+                    });
+                    lblEstado.Text = "Backup no efectuado";
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
         protected void Search_Click(object sender, EventArgs e)

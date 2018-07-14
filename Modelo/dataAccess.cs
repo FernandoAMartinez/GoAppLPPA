@@ -182,18 +182,14 @@ namespace Modelo
             command.CommandType = type;
             command.Connection = cnn;
             command.Parameters.AddRange(param);
-            //tx = cnn.BeginTransaction();
-            //command.Transaction = tx;
             try
             {
                 retorno = command.ExecuteNonQuery();
-                //tx.Commit();
                 return retorno;
             }
             catch (SqlException ex)
             {
                 retorno = -1;
-                //tx.Rollback();
                 return retorno;
             }
             finally

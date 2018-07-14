@@ -11,7 +11,12 @@ namespace NegocioService
     {
         public int PerformBackup(string path)
         {
-            return SeguridadDAL.Perform(path);
+            return SeguridadDAL.Perform(0, path);
+        }
+
+        public int PerformRestore(string path)
+        {
+            return SeguridadDAL.Perform(1, path);
         }
     }
 }
