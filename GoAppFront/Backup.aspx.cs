@@ -66,11 +66,14 @@ namespace GoAppFront
         {
             int ret = 0;
             string path = ConfigurationManager.AppSettings["BackupDir"];
+            //path = Directory.GetFiles(path, "*.bak").Where(x => new FileInfo(x).CreationTime == DateTime.Today.Date).ToString();
+            string[] files = Directory.GetFiles(path, "GoApp_LPPA*.bak");
+
             SeguridadService Sec = new SeguridadService();
             try
             {
-                ret = Sec.PerformRestore(path);
-                if (ret == 0)
+                ret = Sec.PerformRestore(files[0].ToString());
+                if (ret == -1)
                 {
                     UsuarioDTO user = (UsuarioDTO)Session["Usuario"];
                     BitacoraService service = new BitacoraService();

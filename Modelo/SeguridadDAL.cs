@@ -15,7 +15,7 @@ namespace Modelo
                 int ret = 0;
                 //path = path.Replace("\\", "/");
                 //path = path.Replace('"', "");
-                ret = DataAccess.Instance.Perform("New_Backup", CommandType.StoredProcedure, new SqlParameter[]{
+                ret = DataAccess.Instance.PerformBackup("New_Backup", CommandType.StoredProcedure, new SqlParameter[]{
                 DataAccess.CreateParameter("filepath", path) });
 
                 return ret;
@@ -25,7 +25,7 @@ namespace Modelo
                 int ret = 0;
                 //path = path.Replace("\\", "/");
                 //path = path.Replace('"', "");
-                ret = DataAccess.Instance.Perform("New_Restore", CommandType.StoredProcedure, new SqlParameter[]{
+                ret = DataAccess.Instance.PerformRestore("New_Restore", CommandType.StoredProcedure, new SqlParameter[]{
                 DataAccess.CreateParameter("filepath", path) });
 
                 return ret;

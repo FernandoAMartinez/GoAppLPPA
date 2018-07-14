@@ -173,7 +173,34 @@ namespace Modelo
 
         #region Bacup & Restore
 
-        public int Perform(string store, CommandType type, SqlParameter[] param = null)
+        public int PerformRestore(string store, CommandType type, SqlParameter[] param = null)
+        {
+            int retorno;
+            SqlCommand command = new SqlCommand();
+            cnn = new SqlConnection(ConfigurationManager.ConnectionStrings["masterDB"].ConnectionString);
+            cnn.Open();
+            //Open();
+            command.CommandText = store;
+            command.CommandType = type;
+            command.Connection = cnn;
+            command.Parameters.AddRange(param);
+            try
+            {
+                retorno = command.ExecuteNonQuery();
+                return retorno;
+            }
+            catch (SqlException ex)
+            {
+                retorno = -1;
+                return retorno;
+            }
+            finally
+            {
+                Close();
+            }
+        }
+
+        public int PerformBackup(string store, CommandType type, SqlParameter[] param = null)
         {
             int retorno;
             SqlCommand command = new SqlCommand();
