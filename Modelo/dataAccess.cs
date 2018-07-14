@@ -173,12 +173,34 @@ namespace Modelo
 
         #region Bacup & Restore
 
-        public void Restore()
+        public int Perform(string store, CommandType type, SqlParameter[] param = null)
         {
-
+            int retorno;
+            SqlCommand command = new SqlCommand();
+            Open();
+            command.CommandText = store;
+            command.CommandType = type;
+            command.Connection = cnn;
+            command.Parameters.AddRange(param);
+            //tx = cnn.BeginTransaction();
+            //command.Transaction = tx;
+            try
+            {
+                retorno = command.ExecuteNonQuery();
+                //tx.Commit();
+                return retorno;
+            }
+            catch (SqlException ex)
+            {
+                retorno = -1;
+                //tx.Rollback();
+                return retorno;
+            }
+            finally
+            {
+                Close();
+            }
         }
-
-        public void Backup() { }
 
         #endregion
 

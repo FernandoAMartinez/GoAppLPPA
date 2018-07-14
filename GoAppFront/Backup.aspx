@@ -57,7 +57,7 @@
                                             // Parte 1 - Bitacora - LLamado al formulario de bitácora
                                             Response.Write("<li role ='presentation' ><a href ='Bitacora.aspx'>Bitacora </a></li>");
                                             Response.Write("<li role ='presentation' ><a href ='#services'>Administradores </a></li>");
-                                            Response.Write("<li role ='presentation' ><a href ='#contact'>Clientes </a></li>");
+                                            Response.Write("<li role ='presentation' ><a href ='Backup.aspx'>Backup</a></li>");
                                         }
                                         else if (((int)Session["Perfil"]) == 2)
                                         {
@@ -90,8 +90,8 @@
             <article class="wrapper">
                 <div class="backup">
                     <br />
-                    <asp:Label runat="server" Text="Destino de Backup">Destino de Backup</asp:Label>
-                    <asp:TextBox runat="server" ID="tbPath" CssClass="form-control"></asp:TextBox>
+                    <asp:Label runat="server" Text="Destino de Backup" ID="lblEstado"></asp:Label>
+<%--                    <asp:TextBox runat="server" ID="tbPath" CssClass="form-control"></asp:TextBox>--%>
                     <asp:Button runat="server" Text="..." OnClick="Search_Click" class="btn btn-lg btn-primary btn-block"/>
                     <br />
                     <asp:Button runat="server" Text="Ejecutar Backup" OnClick="Backup_Click" class="btn btn-lg btn-primary btn-block"/>

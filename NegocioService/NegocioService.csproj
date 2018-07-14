@@ -47,6 +47,7 @@
     <Compile Include="Helper\Seguridad.cs" />
     <Compile Include="PerfilService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SeguridadService.cs" />
     <Compile Include="UsuarioService.cs" />
   </ItemGroup>
   <ItemGroup>

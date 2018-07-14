@@ -46,7 +46,7 @@
                                         // Parte 1 - Bitacora - LLamado al formulario de bitácora
                                         Response.Write("<li role ='presentation' ><a href ='Bitacora.aspx'>Bitacora </a></li>");
                                         Response.Write("<li role ='presentation' ><a href ='#services'>Administradores </a></li>");
-                                        Response.Write("<li role ='presentation' ><a href ='#contact'>Clientes </a></li>");
+                                        Response.Write("<li role ='presentation' ><a href ='Backup.aspx'>Backup</a></li>");
                                     }
                                     else if (((int)Session["Perfil"]) == 2)
                                     {
