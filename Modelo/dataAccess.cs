@@ -34,7 +34,8 @@ namespace Modelo
         {
             try
             {
-                cnn = new SqlConnection(ConfigurationManager.ConnectionStrings["GoAppDB"].ConnectionString);
+                //cnn = new SqlConnection(ConfigurationManager.ConnectionStrings["GoAppDB"].ConnectionString);
+                cnn = new SqlConnection(ConfigurationManager.ConnectionStrings["LPPA_FINAL"].ConnectionString);
                 cnn.Open();
             }
             catch (Exception ex)

@@ -62,7 +62,21 @@ namespace Negocio
 
         #endregion
 
+        #region Methods
+        public int GetDV(string param)
+        {
+            int sum = 0;
+            byte[] ASCIIValues = Encoding.ASCII.GetBytes(param);
 
+            int pos = 0;
+            foreach (byte b in ASCIIValues)
+            {
+                sum += b * pos;
+                pos += 1;
+            }
+            return sum;
+        }
+        #endregion
 
     }
 }

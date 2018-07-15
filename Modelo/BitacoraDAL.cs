@@ -15,11 +15,17 @@ namespace Modelo
         public static int Insert(Bitacora bitacora)
         {
             int ret = 0;
-            ret = DataAccess.Instance.Write("Bitacora_Insert", CommandType.StoredProcedure,new SqlParameter[]{
-                DataAccess.CreateParameter("Accion", bitacora.Accion),
-                DataAccess.CreateParameter("Descripcion", bitacora.Descripcion),
-                DataAccess.CreateParameter("Fecha", bitacora.Fecha),
-                DataAccess.CreateParameter("Usuario_Id", bitacora.Usuario.Id)});
+            ret = DataAccess.Instance.Write("Bitacora_Insert", 
+                                            CommandType.StoredProcedure,
+                                            new SqlParameter[]{DataAccess.CreateParameter("Accion", bitacora.Accion),
+                                                               DataAccess.CreateParameter("Descripcion", bitacora.Descripcion),
+                                                               DataAccess.CreateParameter("Fecha", bitacora.Fecha),
+                                                               DataAccess.CreateParameter("Usuario_Id", bitacora.Usuario.Id),
+                                                               DataAccess.CreateParameter("DVH", bitacora.GetDV(Convert.ToString(bitacora.Accion) +
+                                                                                                                Convert.ToString(bitacora.Descripcion) +
+                                                                                                                Convert.ToString(bitacora.Fecha) +
+                                                                                                                Convert.ToString(bitacora.Usuario.Id)))
+                                                                   });
 
             return ret;
         }
@@ -30,13 +36,13 @@ namespace Modelo
             // Parte 5 - Creacion de parametros 
             DataTable table = DataAccess.Instance.Read("Bitacora_Select", CommandType.StoredProcedure);
             foreach (DataRow row in table.Rows) {
-                bitacoras.Add(Convert(row));
+                bitacoras.Add(ConvertRow(row));
             }
 
             return bitacoras;
         }
 
-        private static Bitacora Convert(DataRow row)
+        private static Bitacora ConvertRow(DataRow row)
         {
             Bitacora bitacora = null;
             if (row != null)
