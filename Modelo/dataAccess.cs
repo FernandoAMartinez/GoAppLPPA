@@ -191,7 +191,7 @@ namespace Modelo
             }
             catch (SqlException ex)
             {
-                retorno = -1;
+                retorno = 0;
                 return retorno;
             }
             finally
