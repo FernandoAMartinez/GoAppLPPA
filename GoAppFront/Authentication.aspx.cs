@@ -2,6 +2,8 @@
 using System.Web.UI;
 using NegocioService;
 using NegocioService.DTO;
+using System.Data;
+using System.Windows.Forms;
 
 namespace GoAppFront
 {
@@ -39,37 +41,56 @@ namespace GoAppFront
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            //Parte 2: Se completan los datos de inicio de sesión
+            SeguridadService SecServ = new SeguridadService();
+            DataTable Tablas = new DataTable();
+            Tablas = SecServ.TraerTablas();
+
+            for (int i = 0; i < Tablas.Rows.Count; i++)
+            {
+                DataTable tabla = SecServ.ValidarDigitos(i);
+                Session["dtErrores"] = tabla;
+                if (tabla != null)
+                {
+                    foreach (DataRow row in tabla.Rows)
+                    {
+                        MessageBox.Show("Error en la fila: " + row[0] + "", "Tabla: " + Tablas.Rows[i]["Tabla"]);
+                    }
+                    
+                }
+                else if (i == Tablas.Rows.Count)
+                {
+                    goto SkipLogin;
+                }
+                else
+                {
+                    continue;
+                }                    
+            }
             string User = txtUserName.Text;
             string Password = txtPassword.Text;
 
-            //Parte 3: Se llama a la función de validación de inicio de sesión
             UsuarioDTO usuario = UsuarioService.GetByLogin(User, Password);
             if (usuario != null)
             {
-                /* Inicio modificación - Fernando Martinez 10.06.2018
-                if (!usuario.IsBlocked && usuario.Tries <= 3) 
-                Fin modificación */
 
                 if (usuario.IsBlocked == false && usuario.Tries > 0)
                 {
-                    //Parte 8: Creación de variable de sesión
                     Session["Usuario"] = usuario;
                     BitacoraService.Insert(new BitacoraDTO() { Accion = "LOGIN", Descripcion ="Se logueo al sistema el usuario " + usuario.UserName,
                     Fecha = DateTime.Now, Usuario = usuario});
-                    //Redireccionar a Página de Inicio
                     Response.Redirect("Default.aspx");
                 }
                 else
                 {
-                    //Esta Bloqueado.
                     txtError.Text = "El Usuario esta Bloqueado";
                 }
             }
             else {
-                //Usuario o Contraseña Incorrectos o No Existen.
                 txtError.Text = "El Usuario o Contraseña son Incorrectos";
             }
+            SkipLogin:
+                txtError.Text = "Hubo errores de integridad.";
+                
         }
 
         private void ClearForm()

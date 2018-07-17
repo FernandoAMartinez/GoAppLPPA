@@ -3,52 +3,32 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Bitácoras</title>
-    <style type="text/css">
-        /* The navigation bar */
-             .navbar {
-                overflow: hidden;
-                background-color: #333;
-                position: fixed; /* Set the navbar to fixed position */
-                top: 0; /* Position the navbar at the top of the page */
-                width: 100%; /* Full width */
-                height: 35px;
-            }
+    <title>Registros Erroneos</title>
 
-            /* Links inside the navbar */
-            .navbar a {
-                float: left;
-                display: block;
-                color: #f2f2f2;
-                text-align: center;
-                padding: 14px 16px;
-                text-decoration: none;
-            }
-
-            /* Change background on mouse-over */
-            .navbar a:hover {
-                background: #ddd;
-                color: black;
-            }
-
-            /* Main content */
-            .main
-        
-            /* Body */
-            .body{
-                background-color: gainsboro;
-            }
-    </style>
 </head>
 <body class="body">
-      <!-- Navbar -->
-    <div class="navbar">
-        <a href="Default.aspx">Inicio</a>
-        <a href="Contact.aspx">Propuesta</a>
-        <a href="Contact.aspx">¿Quienes somos?</a>
-        <a href="Contact.aspx">Contacto</a>
-    </div> 
-    <!-- Navbar -->
+    
+    <form action="/" method="post" id="formErrores">
+        <asp:DataGrid ID="dgErrores" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None">
+                <AlternatingItemStyle BackColor="White" />
+                <Columns>
+                    <asp:BoundColumn DataField="Columna 1" HeaderText="Columna 1" />
+                    <asp:BoundColumn DataField="Columna 2" HeaderText="Columna 2" />
+                    <asp:BoundColumn DataField="Columna 3" HeaderText="Columna 3" />
+                    <asp:BoundColumn DataField="Columna 4" HeaderText="Columna 4" />
+                    <asp:BoundColumn DataField="Columna 5" HeaderText="Columna 5" />
+                    <asp:BoundColumn DataField="Columna 6" HeaderText="Columna 6" />
+                    <asp:BoundColumn DataField="Columna 7" HeaderText="Columna 7" />
+<%--                    <asp:BoundColumn DataField="Usuario.UserName" HeaderText="ID Usuario" />--%>
+                </Columns>
+                <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
+                <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
+                <ItemStyle BackColor="#FFFBD6" ForeColor="#333333" />
+                <PagerStyle BackColor="#FFCC66" ForeColor="#333333" HorizontalAlign="Center" />
+<%--                <SelectedItemStyle BackColor="#FFCC66" Font-Bold="True" ForeColor="Navy" />--%>
+            </asp:DataGrid>
+
+    </form>
     
 
 </body>

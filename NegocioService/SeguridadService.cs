@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Modelo;
+using System.Data;
 
 namespace NegocioService
 {
@@ -17,6 +18,19 @@ namespace NegocioService
         public int PerformRestore(string path)
         {
             return SeguridadDAL.Perform(1, path);
+        }
+
+        public DataTable ValidarDigitos(int pos)
+        {
+            DataTable tabla, errores = new DataTable();
+            SeguridadDAL.ValidarDigitos(pos, out tabla, out errores);
+
+            return errores;
+        }
+
+        public DataTable TraerTablas()
+        {
+            return SeguridadDAL.TraerTablas();
         }
     }
 }

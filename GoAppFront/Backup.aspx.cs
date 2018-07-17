@@ -84,7 +84,7 @@ namespace GoAppFront
                         Fecha = DateTime.Now,
                         Usuario = user
                     });
-                    lblEstado.Text = "Backup Efectuado";
+                    lblEstado.Text = "Restore Efectuado";
                 }
                 else
                 {
@@ -107,9 +107,9 @@ namespace GoAppFront
             }
         }
 
-        protected void Search_Click(object sender, EventArgs e)
-        {
-            //nothing
-        }
+        //protected void Search_Click(object sender, EventArgs e)
+        //{
+        //    //nothing
+        //}
     }
 }
