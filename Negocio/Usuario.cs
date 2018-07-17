@@ -2,7 +2,7 @@
 {
     public class Usuario
     {
-        #region Constructors
+            #region Constructors
         public Usuario() { }
 
         public Usuario(string User, string Pass)

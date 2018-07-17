@@ -42,7 +42,7 @@ namespace Modelo
 
         public static Usuario GetById(int Id)
         {
-            Usuario usuario = null;
+            Usuario usua    rio = null;
             DataTable table = DataAccess.Instance.Read("Usuario_Select", CommandType.StoredProcedure, new SqlParameter[]{
                DataAccess.CreateParameter("Id", Id)});
 
