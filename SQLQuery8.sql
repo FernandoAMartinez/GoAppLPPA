@@ -48,6 +48,7 @@
 --from (select top 1 *
 --	  from (select Tabla from DVV)
 
+--Se obtiene la tabla de dígitos verificadores verticales
 CREATE PROCEDURE Digitos_Verticales
 AS
 BEGIN
@@ -57,7 +58,9 @@ BEGIN
 	FROM DVV
 END
 
-ALTER PROCEDURE Get_Digitos
+--Store Procedure para obtener todos los dígitos verificadores de la tabla parámetro
+--El campo de dígito verificador horizontal se debe llamar DVH
+CREATE PROCEDURE Get_Digitos
 	@tabla nvarchar(30)
 AS
 BEGIN
@@ -66,6 +69,9 @@ BEGIN
 	EXEC (@SQL)
 END
 
+
+--Store Procedure para obtene todas las columnas de una tabla, sin la de Dígito verificador horizontal
+--El campo de dígito verificador horizontal se debe llamar DVH
 CREATE PROCEDURE Get_Columns
 	@tabla nvarchar(30)
 AS
@@ -80,4 +86,15 @@ BEGIN
 	EXEC (@SQL)
 END
 
-EXEC Get_Colums 'Usuario'
+SELECT CONVERT(VARCHAR(19), GETDATE(), 120)
+SELECT GETDATE()
+
+DECLARE @TESTDATE VARCHAR(19)
+SET @TESTDATE = (SELECT CONVERT(VARCHAR(19), GETDATE(), 120))
+SELECT @TESTDATE
+
+DECLARE @DATETIME DATETIME
+SET @DATETIME = @TESTDATE
+SELECT @DATETIME
+
+tablaHorarios = select horarios

@@ -5,7 +5,7 @@ CREATE TABLE [dbo].[Bitacora] (
     [Id]          INT           IDENTITY (1, 1) NOT NULL,
     [Accion]      VARCHAR (50)  NULL,
     [Descripcion] VARCHAR (150) NULL,
-    [Fecha]       DATETIME      NULL,
+    [Fecha]       VARCHAR(19)      NULL,
     [Usuario_Id]  INT           NULL,
     [DVH]         INT           NOT NULL
 );

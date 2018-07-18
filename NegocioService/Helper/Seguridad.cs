@@ -40,6 +40,7 @@ namespace NegocioService.Helper
             set { b_Stream = value; }
         }
 
+       
         public string GetMD5(string str)
         {
             Stream = null;
