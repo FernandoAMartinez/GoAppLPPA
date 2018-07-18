@@ -4,6 +4,7 @@ using NegocioService;
 using NegocioService.DTO;
 using System.Data;
 using System.Windows.Forms;
+using System.Text;
 
 namespace GoAppFront
 {
@@ -51,11 +52,13 @@ namespace GoAppFront
                 Session["dtErrores"] = tabla;
                 if (tabla != null)
                 {
+                    StringBuilder sb = new StringBuilder();
                     foreach (DataRow row in tabla.Rows)
                     {
-                        MessageBox.Show("Error en la fila: " + row[0] + "", "Tabla: " + Tablas.Rows[i]["Tabla"]);
+                        sb.AppendLine("Error en la tabla " + Tablas.Rows[i]["Tabla"] + " registro " + row[0] + ".");
+                        //MessageBox.Show("Error en la fila: " + row[0] + "", "Tabla: " + Tablas.Rows[i]["Tabla"]);
                     }
-                    
+                    MessageBox.Show(sb.ToString(), "Errores de integridad");
                 }
                 else if (i == Tablas.Rows.Count)
                 {

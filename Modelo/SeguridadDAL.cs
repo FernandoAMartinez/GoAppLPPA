@@ -48,13 +48,13 @@ namespace Modelo
 
         public static void ValidarDigitos(int pos, out DataTable lista, out DataTable errores)
         {
-            //int pos = 0;  Averga andó
-            //DataTable errores = new DataTable();
             errores = null;
             lista = null;
             DataTable Tablas = DataAccess.Instance.Read("Digitos_Verticales",
                                                         CommandType.StoredProcedure,
                                                         null);
+            
+            //Validar dígitos Verificadores horizontales
             foreach (DataRow tabla in Tablas.Rows)
             {
                 lista = new DataTable();    //Se inicializan las tablas internas
@@ -76,22 +76,16 @@ namespace Modelo
                     lista.Columns.Add(col.ColumnName);
                     errores.Columns.Add(col.ColumnName);
                 }
-                
 
                 for (int i = 0; i < pruebaRows.Rows.Count; i++)
                 {
                     StringBuilder sb = new StringBuilder();
-                    int result = 0;
                     int prueba = Convert.ToInt32(interna.Rows[i]["DVH"]);
-                    //foreach (DataColumn column in pruebaRows.Columns)
-                    //{
-                    //    sb.Append(column.Table.Rows[i+1].ItemArray);
-                    //}
+
                     for (int j = 0; j < pruebaRows.Columns.Count; j++)
                     {
                         sb.Append(pruebaRows.Rows[i][j]);
                     }
-                    //int dvCalc = GetDV(Convert.ToString(interna.Columns[0]) + Convert.ToString(interna.Columns[1]) + Convert.ToString(interna.Columns[2]) + Convert.ToString(interna.Columns[3]));
                     int pruebaDV = GetDV(sb.ToString());
                     DataRow Row = pruebaRows.Rows[i];
 
@@ -99,36 +93,14 @@ namespace Modelo
                         lista.Rows.Add(Row.ItemArray);
                     else
                         errores.Rows.Add(Row.ItemArray);
-                        //errores.Rows.Add(pruebaRows.Rows[i]);
                 }
-                //pos += 1;
-                
-            //foreach (DataRow row in interna.Rows)
-                //{
-                //    int result = 0;
-                //    int prueba = Convert.ToInt32(interna.Rows[pos]["DVH"]);
-                //    foreach (DataColumn column in pruebaRows.Columns)
-                //    {
-                //        sb.Append(column.ToString());
-                //    }
-                //    //int dvCalc = GetDV(Convert.ToString(interna.Columns[0]) + Convert.ToString(interna.Columns[1]) + Convert.ToString(interna.Columns[2]) + Convert.ToString(interna.Columns[3]));
-                //    if (Convert.ToInt64(interna.Rows[pos]["DVH"]) == GetDV(sb.ToString()))
-                //        result = 1;
-                //    else
-                //        result = -1;
-                //}
-
-                
-                //if (Convert.ToInt32(interna.Rows[0]["DVH"]) == GetDV(Convert.ToString(interna.Rows[0]) +
-                //                                                     Convert.ToString(interna.Rows[1]) +
-                //                                                     Convert.ToString(interna.Rows[2]) +
-                //                                                     Convert.ToString(interna.Rows[3])))
-                //    lista.Rows.Add(tabla);
-                //else
-                //    errores.Rows.Add(tabla);
-
 
             }
+
+            DataTable Verticales = DataAccess.Instance.Read("Digitos_Verticales",
+                                                            CommandType.StoredProcedure,
+                                                            null);
+
 
         }
 
