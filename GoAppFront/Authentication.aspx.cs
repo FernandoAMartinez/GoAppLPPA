@@ -50,6 +50,7 @@ namespace GoAppFront
             {
                 DataTable tabla = SecServ.ValidarDigitos(i);
                 Session["dtErrores"] = tabla;
+                Session.Add("Tabla " + Tablas.Rows[i]["Tabla"], tabla);
                 if (tabla != null)
                 {
                     StringBuilder sb = new StringBuilder();

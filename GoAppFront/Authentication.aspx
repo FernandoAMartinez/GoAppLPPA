@@ -10,7 +10,6 @@
       <link rel="stylesheet" href="/Content/style.css">
 </head>
 <body>
-  
     <div class="wrapper">
         <form runat="server" class="form-signin" method="post" >       
             <h2 class="form-signin-heading">Inicio de Sesión</h2>

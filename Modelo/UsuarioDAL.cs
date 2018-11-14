@@ -1,11 +1,7 @@
 ﻿using Negocio;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Modelo
 {
@@ -28,7 +24,6 @@ namespace Modelo
 
         public static Usuario GetByLogin(string UserName, string Password)
         {
-            //Parte 5: Asignar parámetros a Procedimiento Almacenado y llamada
             Usuario usuario = null;
             DataTable table = DataAccess.Instance.Read("Usuario_Select",CommandType.StoredProcedure ,new SqlParameter[]{
                DataAccess.CreateParameter("UserName", UserName),

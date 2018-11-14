@@ -21,7 +21,8 @@ namespace Modelo
                                                                DataAccess.CreateParameter("Descripcion", bitacora.Descripcion),
                                                                DataAccess.CreateParameter("Fecha", bitacora.Fecha),
                                                                DataAccess.CreateParameter("Usuario_Id", bitacora.Usuario.Id),
-                                                               DataAccess.CreateParameter("DVH", bitacora.GetDV(Convert.ToString(bitacora.Accion) +
+                                                               DataAccess.CreateParameter("DVH", bitacora.GetDV(Convert.ToString(GetNextId("Bitacora")) +
+                                                                                                                Convert.ToString(bitacora.Accion) +
                                                                                                                 Convert.ToString(bitacora.Descripcion) +
                                                                                                                 Convert.ToString(bitacora.Fecha) +
                                                                                                                 Convert.ToString(bitacora.Usuario.Id)))
@@ -30,10 +31,27 @@ namespace Modelo
             return ret;
         }
 
+        //Inicio Modificación - FernandoAMartinez - 05.11.2018
+        public static int GetNextId(string tabla)
+        {
+            int ret = 0;
+            DataTable table =  DataAccess.Instance.Read("Select_NextId",
+                                                        CommandType.StoredProcedure,
+                                                        new SqlParameter[] { DataAccess.CreateParameter("Tabla", tabla) });
+
+            if (table.Rows.Count == 1)
+                if (table.Rows[0][0].ToString() == "")
+                    ret = 1;
+                else
+                    ret = (int)table.Rows[0][0] + 1;
+
+            return ret;
+        }
+        //Fin Modificación - FernandoAMartinez - 05.11.2018
+
         public static List<Bitacora> GetAll()
         {
             List<Bitacora> bitacoras = new List<Bitacora>();
-            // Parte 5 - Creacion de parametros 
             DataTable table = DataAccess.Instance.Read("Bitacora_Select", CommandType.StoredProcedure);
             foreach (DataRow row in table.Rows) {
                 bitacoras.Add(ConvertRow(row));

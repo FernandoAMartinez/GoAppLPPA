@@ -12,9 +12,7 @@ namespace Modelo
 
         private static DataAccess instance;
 
-        private DataAccess()
-        {
-        }
+        private DataAccess(){}
 
         public static DataAccess Instance
         {
@@ -63,7 +61,7 @@ namespace Modelo
         #region Method Access
 
         public DataTable Read(string store, CommandType type, SqlParameter[] param = null)
-        { // Parte 6 - Login a- Llamada al StoredProcedure
+        { 
             DataTable tabla = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter();
             Open();
@@ -71,9 +69,8 @@ namespace Modelo
             adapter.SelectCommand.CommandText = store;
             adapter.SelectCommand.CommandType = type;
             if (param != null)
-            {
                 adapter.SelectCommand.Parameters.AddRange(param);
-            }
+
             adapter.SelectCommand.Connection = cnn;
             adapter.Fill(tabla);
             Close();
@@ -110,6 +107,26 @@ namespace Modelo
 
         }
 
+        //Inicio Modificación - FernandoAMartinez
+        public DataSet ReadWS(string store, CommandType type, SqlParameter[] param = null)
+        {
+            DataTable tabla = new DataTable();
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            Open();
+            adapter.SelectCommand = new SqlCommand();
+            adapter.SelectCommand.CommandText = store;
+            adapter.SelectCommand.CommandType = type;
+            if (param != null)
+                adapter.SelectCommand.Parameters.AddRange(param);
+
+            adapter.SelectCommand.Connection = cnn;
+            adapter.Fill(tabla);
+            Close();
+            DataSet ds = new DataSet();
+            ds.Tables.Add(tabla);
+            return ds;
+        }
+        //Fin Modificación - FernandoAMartinez
         #endregion
 
         #region Create Parameter

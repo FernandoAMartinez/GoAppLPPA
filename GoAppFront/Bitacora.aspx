@@ -19,6 +19,8 @@
             margin-top: 61px;
             margin-left:auto;
             margin-right:auto;
+            padding-left: 100px;
+
         }
         .auto-style2 {
             margin-top: 47px;
@@ -26,7 +28,7 @@
             font-size:large;
         }
         .auto-style3 {
-            margin-top: 0
+            margin-top: 0;
         }
     </style>
 </head>
@@ -111,7 +113,7 @@
     </section>
     <h1 class="auto-style2">Bitácora</h1>
         <div class="auto-style1">
-            <asp:DataGrid ID="dgBitacora" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" CssClass="auto-style3">
+            <asp:DataGrid ID="dgBitacora" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" CssClass="auto-style3"> <%--Width="687px">--%>
                 <AlternatingItemStyle BackColor="White" />
                 <Columns>
                     <asp:BoundColumn DataField="Id" HeaderText="Bitacora" />

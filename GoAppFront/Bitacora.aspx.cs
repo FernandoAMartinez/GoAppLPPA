@@ -25,10 +25,8 @@ namespace GoAppFront
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Parte 2 - Creacion de lista de Bitacora
             List<BitacoraDTO> bitacoras = BitacoraService.GetAll();
             dgBitacora.DataSource = bitacoras;
-            // Parte 8 - Llenar Data Gridview
             dgBitacora.DataBind();
         }
 
