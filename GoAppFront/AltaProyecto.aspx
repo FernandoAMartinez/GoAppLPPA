@@ -1,24 +1,33 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Carrito.aspx.cs" Inherits="GoAppFront.Carrito" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
- 
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AltaProyecto.aspx.cs" Inherits="GoAppFront.AltaProyecto" %>
+
+<!DOCTYPE html>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Shopping Cart</title>
+    <title>Alta de Proyectos</title>
     <link href="Styles/StyleSheet.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="/Content/Home/bootstrap.min.css"/>
     <link rel="stylesheet" href="/Content/Home/animate.css"/>
     <link rel="stylesheet" href="/Content/Home/style.css"/>
     <style>
-                .auto-style2 {
+        .auto-style2 {
             margin-top: 47px;
             font-family:Arial;
             font-size:large;
         }
+        .contents-under {
+          padding-top: 50px;
+        }
+
+        .fuente {
+            color: black;
+        }
     </style>
 </head>
 <body>
-    <header>
-        <form runat="server">	
+    <form runat="server">	
+        <header>
+        
 		    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		    	<div class="navigation">
 		    		<div class="container">	
@@ -47,7 +56,6 @@
                                             Response.Write("<li role ='presentation' ><a href ='Backup.aspx'>Backup</a></li>");
                                             Response.Write("<li role ='presentation' ><a href ='Contact.aspx'>Registros Erroneos</a></li>");
                                             Response.Write("<li role='presentation'><a href='AltaProtecto.aspx'>Alta Proyectos</a></li>");
-
                                         }
                                         else if (((int)Session["Perfil"]) == 2)
                                         {
@@ -72,38 +80,18 @@
 		    		</div>
 		    	</div>	
 		    </nav>			
-        </form>
+        
 	</header>
-    <div>
-        <%
-            //foreach (Proj in (Proyecto)Session["Proyectos"])
-            //{
-            //    Response.Write("<tr><td>" + Proj.Id + "-" + Proj.Description + " by $" + Proj.Price + "</td></tr>");
-            //}
-            
-        %>
-    </div>
-        <h1 class="auto-style2">Proyectos Disponibles</h1>
-        <div class="auto-style1">
-            <asp:DataGrid ID="dgProyecyos" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" CssClass="auto-style3"> <%--Width="687px">--%>
-                <AlternatingItemStyle BackColor="White" />
-                <Columns>
-                    <asp:BoundColumn DataField="Id" HeaderText="Id" />
-                    <asp:BoundColumn DataField="Nombre" HeaderText="Proyecto" />
-                    <asp:BoundColumn DataField="Meta" HeaderText="Meta a Recaudar" />
-                    <asp:BoundColumn DataField="Recaudado" HeaderText="Recaudado" />
-                    <asp:BoundColumn DataField="Cantidad" HeaderText="Contribuciones" />
-                    <asp:BoundColumn DataField="FechaInicio" HeaderText="Inicio de Proyecto" />
-                    <asp:BoundColumn DataField="FechaFin" HeaderText="Fin de Proyecto" />
-<%--                    <asp:BoundColumn DataField="Usuario.UserName" HeaderText="ID Usuario" />--%>
-                </Columns>
-                <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
-                <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
-                <ItemStyle BackColor="#FFFBD6" ForeColor="#333333" />
-                <PagerStyle BackColor="#FFCC66" ForeColor="#333333" HorizontalAlign="Center" />
-<%--                <SelectedItemStyle BackColor="#FFCC66" Font-Bold="True" ForeColor="Navy" />--%>
-            </asp:DataGrid>
-        </div>
-
+        <section>
+            <div class="contents-under fuente">
+                <br /><br /><br /><br /><br /><br />
+                <asp:Label Text="Nombre Proyecto" runat="server" /> &nbsp; <asp:TextBox ID="tbNombre" runat="server" /><br />
+                <asp:Label Text="Meta a Recaudar" runat="server" /> &nbsp; <asp:TextBox ID="tbMeta" runat="server" /><br />
+                <asp:Label Text="Inicio del Proyecto" runat="server" /> &nbsp; <asp:TextBox ID="tbInico" runat="server" /><br />
+                <asp:Label Text="Fin del Proyecto" runat="server" /> &nbsp; <asp:TextBox ID="tbFin" runat="server" /><br />
+                <asp:Button Text="Enviar" runat="server" OnClick="AltaProyecto_Click" /><br />
+            </div>
+        </section>
+    </form>
 </body>
 </html>

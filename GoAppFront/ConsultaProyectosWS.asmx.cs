@@ -17,18 +17,6 @@ namespace GoAppFront
     // [System.Web.Script.Services.ScriptService]
     public class ConsultaProyectosWS : System.Web.Services.WebService
     {
-        //private static ProyectoService _proyectoService;
-        //
-        //public static ProyectoService ProyectoService
-        //{
-        //    get
-        //    {
-        //        if (_proyectoService == null)
-        //            _proyectoService = new ProyectoService();
-        //
-        //        return _proyectoService;
-        //    }
-        //}
 
         [WebMethod]
         public DataTable ConsultaProyectos()

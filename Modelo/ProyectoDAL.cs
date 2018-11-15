@@ -16,10 +16,10 @@ namespace Modelo
 
             int ret = DataAccess.Instance.Write("Proyecto_InsertOrUpdate", CommandType.StoredProcedure, new SqlParameter[]{
                DataAccess.CreateParameter("Nombre", proyecto.Nombre),
-               DataAccess.CreateParameter("MetaRecaud", proyecto.MetaRecaud),
+               DataAccess.CreateParameter("Meta", Convert.ToInt32(proyecto.MetaRecaud)),
                DataAccess.CreateParameter("FechaInicio", proyecto.FechaInicio),
-               DataAccess.CreateParameter("FechaFin", proyecto.FechaFin),
-               DataAccess.CreateParameter("DVH", SeguridadDAL.GetDV(proyecto.Nombre + proyecto))});
+               DataAccess.CreateParameter("FechaFin", proyecto.FechaFin) });
+               //DataAccess.CreateParameter("DVH", SeguridadDAL.GetDV(proyecto.Nombre + proyecto))});
 
             return ret;
         }
@@ -73,7 +73,7 @@ namespace Modelo
                 proyecto = new Proyecto();
                 proyecto.Id = Int32.Parse(row[0].ToString());
                 proyecto.Nombre = row[1].ToString();
-                proyecto.MetaRecaud = Convert.ToDouble(row[2]);
+                proyecto.MetaRecaud = Convert.ToInt32(row[2]);
                 proyecto.FechaInicio = (DateTime)row[3];
                 proyecto.FechaFin = (DateTime)row[4];
             }

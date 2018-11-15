@@ -37,6 +37,7 @@
                                         Response.Write("<li role ='presentation' ><a href ='Backup.aspx'>Backup & Restore</a></li>");
                                         //Response.Write("<li role ='presentation' ><a href ='Contact.aspx'>Registros Erroneos</a></li>");
                                         Response.Write("<li role='presentation'><a href='Carrito.aspx'>Carrito</a></li>");
+                                            Response.Write("<li role='presentation'><a href='AltaProyecto.aspx'>Alta Proyectos</a></li>");
 
                                     }
                                     else if (((int)Session["Perfil"]) == 2) //Administrador
@@ -58,11 +59,32 @@
 							</ul>
 						</div>
 					</div>
-                        </form>						
+                  </form>						
 				</div>
 			</div>	
 		</nav>			
 	</header>
-    
+    <section>
+        <h1 class="auto-style2">Proyectos Disponibles</h1>
+        <div class="auto-style1">
+            <asp:DataGrid ID="dgProyecyos" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" CssClass="auto-style3"> <%--Width="687px">--%>
+                <AlternatingItemStyle BackColor="White" />
+                <Columns>
+                    <asp:BoundColumn DataField="Id" HeaderText="Id" />
+                    <asp:BoundColumn DataField="Nombre" HeaderText="Proyecto" />
+                    <asp:BoundColumn DataField="Meta" HeaderText="Meta a Recaudar" />
+                    <asp:BoundColumn DataField="Recaudado" HeaderText="Recaudado" />
+                    <asp:BoundColumn DataField="Cantidad" HeaderText="Contribuciones" />
+                    <asp:BoundColumn DataField="FechaInicio" HeaderText="Inicio de Proyecto" />
+                    <asp:BoundColumn DataField="FechaFin" HeaderText="Fin de Proyecto" />
+                </Columns>
+                <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
+                <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
+                <ItemStyle BackColor="#FFFBD6" ForeColor="#333333" />
+                <PagerStyle BackColor="#FFCC66" ForeColor="#333333" HorizontalAlign="Center" />
+            </asp:DataGrid>
+        </div>
+
+    </section>
 </body>
 </html>

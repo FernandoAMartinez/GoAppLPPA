@@ -95,7 +95,7 @@ namespace Modelo
                 return retorno;
             }
             catch (Exception ex)
-            {
+                {
                 retorno = -1;
                 tx.Rollback();
                 return retorno;
@@ -106,27 +106,6 @@ namespace Modelo
             }
 
         }
-
-        //Inicio Modificación - FernandoAMartinez
-        public DataSet ReadWS(string store, CommandType type, SqlParameter[] param = null)
-        {
-            DataTable tabla = new DataTable();
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            Open();
-            adapter.SelectCommand = new SqlCommand();
-            adapter.SelectCommand.CommandText = store;
-            adapter.SelectCommand.CommandType = type;
-            if (param != null)
-                adapter.SelectCommand.Parameters.AddRange(param);
-
-            adapter.SelectCommand.Connection = cnn;
-            adapter.Fill(tabla);
-            Close();
-            DataSet ds = new DataSet();
-            ds.Tables.Add(tabla);
-            return ds;
-        }
-        //Fin Modificación - FernandoAMartinez
         #endregion
 
         #region Create Parameter

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NegocioService.DTO
 {
@@ -12,7 +8,7 @@ namespace NegocioService.DTO
 
         public string Nombre { get; set; }
 
-        public double Meta { get; set; }
+        public int Meta { get; set; }
 
         public DateTime FechaInicio { get; set; }
 

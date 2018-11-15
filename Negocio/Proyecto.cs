@@ -22,9 +22,9 @@ namespace Negocio
             set { _nombre = value; }
         }
 
-        private double _metaRecaud;
+        private int _metaRecaud;
 
-        public double MetaRecaud
+        public int MetaRecaud
         {
             get { return _metaRecaud; }
             set { _metaRecaud = value; }
