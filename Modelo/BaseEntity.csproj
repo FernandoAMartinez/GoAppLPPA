@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContribucionDAL.cs" />
     <Compile Include="DataAccess.cs" />
     <Compile Include="BitacoraDAL.cs" />
     <Compile Include="PerfilDAL.cs" />
@@ -48,6 +49,7 @@
     <Compile Include="ProyectoDAL.cs" />
     <Compile Include="SeguridadDAL.cs" />
     <Compile Include="UsuarioDAL.cs" />
+    <Compile Include="VentaDAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Negocio\UsuarioEntity.csproj">

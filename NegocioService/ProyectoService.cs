@@ -30,7 +30,7 @@ namespace NegocioService
             return dto;
         }
 
-        private Proyecto ToEntity(ProyectoDTO dto)
+        public Proyecto ToEntity(ProyectoDTO dto)
         {
             Proyecto proyecto = new Proyecto();
             proyecto.Id = dto.Id;
@@ -41,7 +41,7 @@ namespace NegocioService
             return proyecto;
         }
 
-        private ProyectoDTO ToDTO(Proyecto proyecto)
+        public ProyectoDTO ToDTO(Proyecto proyecto)
         {
             ProyectoDTO dto = new ProyectoDTO();
             dto.Id = proyecto.Id;

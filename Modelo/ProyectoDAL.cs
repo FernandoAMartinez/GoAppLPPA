@@ -1,11 +1,7 @@
 ﻿using Negocio;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Modelo
 {
@@ -19,8 +15,6 @@ namespace Modelo
                DataAccess.CreateParameter("Meta", Convert.ToInt32(proyecto.MetaRecaud)),
                DataAccess.CreateParameter("FechaInicio", proyecto.FechaInicio),
                DataAccess.CreateParameter("FechaFin", proyecto.FechaFin) });
-               //DataAccess.CreateParameter("DVH", SeguridadDAL.GetDV(proyecto.Nombre + proyecto))});
-
             return ret;
         }
 

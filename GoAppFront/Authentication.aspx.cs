@@ -59,7 +59,9 @@ namespace GoAppFront
                         sb.AppendLine("Error en la tabla " + Tablas.Rows[i]["Tabla"] + " registro " + row[0] + ".");
                         //MessageBox.Show("Error en la fila: " + row[0] + "", "Tabla: " + Tablas.Rows[i]["Tabla"]);
                     }
-                    MessageBox.Show(sb.ToString(), "Errores de integridad");
+                    //Inicio Modificación - FernandoAMartinez
+                    //MessageBox.Show(sb.ToString(), "Errores de integridad");
+                    //Fin Modificación - FernandoAMartinez
                 }
                 else if (i == Tablas.Rows.Count)
                 {
@@ -70,6 +72,7 @@ namespace GoAppFront
                     continue;
                 }                    
             }
+
             string User = txtUserName.Text;
             string Password = txtPassword.Text;
 
@@ -80,8 +83,13 @@ namespace GoAppFront
                 if (usuario.IsBlocked == false && usuario.Tries > 0)
                 {
                     Session["Usuario"] = usuario;
-                    BitacoraService.Insert(new BitacoraDTO() { Accion = "LOGIN", Descripcion ="Se logueo al sistema el usuario " + usuario.UserName,
-                    Fecha = DateTime.Now, Usuario = usuario});
+                    BitacoraService.Insert(new BitacoraDTO()
+                    {
+                        Accion = "LOGIN",
+                        Descripcion ="Se logueo al sistema el usuario " + usuario.UserName,
+                        Fecha = DateTime.Now,
+                        Usuario = usuario
+                    });
                     Response.Redirect("Default.aspx");
                 }
                 else
@@ -89,7 +97,8 @@ namespace GoAppFront
                     txtError.Text = "El Usuario esta Bloqueado";
                 }
             }
-            else {
+            else
+            {
                 txtError.Text = "El Usuario o Contraseña son Incorrectos";
             }
             SkipLogin:
@@ -102,7 +111,5 @@ namespace GoAppFront
             txtUserName.Text = "";
             txtPassword.Text = "";
         }
-
-   
     }
 }

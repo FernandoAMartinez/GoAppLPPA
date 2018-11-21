@@ -6,8 +6,7 @@
 <head>
     <title>Login</title>
     <link rel='stylesheet prefetch' href='http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css'>
-
-      <link rel="stylesheet" href="/Content/style.css">
+    <link rel="stylesheet" href="/Content/style.css">
 </head>
 <body>
     <div class="wrapper">
@@ -19,7 +18,6 @@
             <asp:Button class="btn btn-lg btn-primary btn-block" runat="server" ID="btnLogin" Text="Login" OnClick="btnLogin_Click"/>   
         </form>
     </div>
-  
 </body>
 </html>
 

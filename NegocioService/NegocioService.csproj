@@ -41,16 +41,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BitacoraService.cs" />
+    <Compile Include="ContribucionService.cs" />
     <Compile Include="DTO\BitacoraDTO.cs" />
+    <Compile Include="DTO\ContribucionDTO.cs" />
     <Compile Include="DTO\PerfilDTO.cs" />
     <Compile Include="DTO\ProyectoDTO.cs" />
     <Compile Include="DTO\UsuarioDTO.cs" />
+    <Compile Include="DTO\VentaDTO.cs" />
     <Compile Include="Helper\Seguridad.cs" />
     <Compile Include="PerfilService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProyectoService.cs" />
     <Compile Include="SeguridadService.cs" />
     <Compile Include="UsuarioService.cs" />
+    <Compile Include="VentaService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Modelo\BaseEntity.csproj">
