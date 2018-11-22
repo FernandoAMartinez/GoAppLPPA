@@ -131,7 +131,7 @@
         </div>
 
     <p></p>
-    <asp:Button Text="Enviar" runat="server" OnClick="Enviar_Click" />
-        </form>
+    <asp:Button Text="Enviar" runat="server" OnClick="Enviar_Click"  CssClass="fuente"/>
+    </form>
    </body>
 </html>
