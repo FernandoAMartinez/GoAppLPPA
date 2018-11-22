@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Venta>
+  <Tarjeta>
+    <Numero>4236005250781538</Numero>
+    <Desde>05/12</Desde>
+    <Hasta>08/21</Hasta>
+    <Importe>$250</Importe>
+  </Tarjeta>
+  <Usuario>
+    <Nombre>userMaster</Nombre>
+  </Usuario>
+  <Venta>
+    <Tarjeta>
+      <Numero>4236005250781538</Numero>
+      <Desde>05/12</Desde>
+      <Hasta>08/21</Hasta>
+      <Importe>$500</Importe>
+    </Tarjeta>
+    <Usuario>
+      <Nombre>userMaster</Nombre>
+    </Usuario>
+  </Venta>
+  <Venta>
+    <Tarjeta>
+      <Numero>4236005250781538</Numero>
+      <Desde>05/12</Desde>
+      <Hasta>08/21</Hasta>
+      <Importe>$500</Importe>
+    </Tarjeta>
+    <Usuario>
+      <Nombre>userMaster</Nombre>
+    </Usuario>
+  </Venta>
+  <Venta>
+    <Tarjeta>
+      <Numero>4236005250781538</Numero>
+      <Desde>05/12</Desde>
+      <Hasta>08/21</Hasta>
+      <Importe>$250</Importe>
+    </Tarjeta>
+    <Usuario>
+      <Nombre>userMaster</Nombre>
+    </Usuario>
+  </Venta>
+</Venta>

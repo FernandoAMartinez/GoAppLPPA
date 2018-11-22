@@ -80,7 +80,7 @@
         <h1 class="auto-style2">Proyectos Disponibles</h1>
         <div class="auto-style1">
             <br /><br />
-            <asp:DataGrid ID="dgProyectos" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" CssClass="auto-style3"> <%--Width="687px">--%>
+            <asp:DataGrid ID="dgProyectos" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" CssClass="table table-striped table-bordered"> <%--Width="687px">--%>
                 <AlternatingItemStyle BackColor="White" />
                 <Columns>
                     <asp:BoundColumn DataField="Id" HeaderText="Id" />

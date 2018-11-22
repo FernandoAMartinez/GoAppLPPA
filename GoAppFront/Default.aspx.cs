@@ -63,8 +63,8 @@ namespace GoAppFront
                 contribucion.Proyecto = ProyectoService.GetById(Int32.Parse(gvr.Cells[0].Text));
                 //Fin Modificación - FernandoAMartinez
                 contribucion.IdVenta = 0;
-                contribucion.Cantidad = 0;
-                contribucion.Importe = 0;
+                contribucion.Cantidad = 1;
+                contribucion.Importe = 250;
                 carrito.Add(contribucion);
                 Session["Carrito"] = carrito;
             }
@@ -78,8 +78,8 @@ namespace GoAppFront
                 contribucion.Proyecto = ProyectoService.GetById(Int32.Parse(gvr.Cells[0].Text));
                 //Fin Modificación - FernandoAMartinez                
                 contribucion.IdVenta = 0;
-                contribucion.Cantidad = 0;
-                contribucion.Importe = 0;
+                contribucion.Cantidad = 1;
+                contribucion.Importe = 250;
                 carrito.Add(contribucion);
                 Session["Carrito"] = carrito;
             }

@@ -7,16 +7,24 @@ namespace NegocioService
 {
     public class UsuarioService
     {
-        //public UsuarioDTO GetById(int id) {
+        private TarjetaService _tarjetaService;
 
-        //}
+        public TarjetaService TarjetaService
+        {
+            get
+            {
+                if (_tarjetaService == null)
+                    _tarjetaService = new TarjetaService();
+
+                return _tarjetaService;
+            }
+        }
 
         public int SaveOrUpdate(UsuarioDTO dto)
         {
             return UsuarioDAL.SaveOrUpdate(ToEntity(dto));
 
         }
-
 
         public UsuarioDTO GetByLogin(string user, string password) {
             UsuarioDTO dto = null;
@@ -28,6 +36,13 @@ namespace NegocioService
            
             return dto;
         }
+
+        //Inicio Modificación - FernandoAMartinez
+        public TarjetaDTO GetCardInformation(int id)
+        {
+            return TarjetaService.ToDTO(TarjetaDAL.GetCard(id));
+        }
+        //Fin Modificación - FernandoAMartinez
 
         private Usuario ToEntity(UsuarioDTO dto) {
             Usuario usuario = new Usuario();

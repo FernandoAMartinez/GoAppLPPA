@@ -123,40 +123,11 @@
                 <asp:BoundField DataField="Proyecto.Id" HeaderText="IdProyecto" />
                 <asp:BoundField DataField="Proyecto.Nombre" HeaderText="Nombre" />
                 <%-- Modificación FernandoAMartinez --%>
-                <asp:TemplateField HeaderText="Cantidad">
-                    <ItemTemplate>
-                        <asp:TextBox ID="tbCantidad" runat="server"></asp:TextBox>
-                    </ItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Importe">
-                    <ItemTemplate>
-                        <asp:TextBox ID="tbImporte" runat="server"></asp:TextBox>
-                    </ItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Total">
-                    <ItemTemplate>
-                        <asp:Label ID="lblTotal" runat="server">
-                            <%
-                                //TextBox tbCantidad = new TextBox();
-                                //tbCantidad = ((TextBox)dgCarrito.FindControl("tbCantidad"));
-                                //TextBox tbImporte = new TextBox();
-                                //tbImporte = ((TextBox)dgCarrito.FindControl("tbImporte"));
-                                //Label lblTotal = new Label();
-                                //lblTotal = ((Label)dgCarrito.FindControl("lblTotal"));
-                                //lblTotal.Text = (Int32.Parse(tbCantidad.Text) * Int32.Parse(tbImporte.Text)).ToString();
-                            %>
-                        </asp:Label>
-                    </ItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Quitar de Carrito">
-                    <ItemTemplate>
-                        <asp:LinkButton runat="server" ID="LinkRemove">Remove from cart</asp:LinkButton>
-                    </ItemTemplate>
-                </asp:TemplateField>
+                <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" />
+                <asp:BoundField DataField="Importe" HeaderText="Importe" />
             </Columns>
             </asp:GridView>
-            <br />
-            <asp:Button ID="Button1" runat="server" Text="Button" Width="93px" />
+        
         </div>
 
     <p></p>

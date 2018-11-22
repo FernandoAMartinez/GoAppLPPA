@@ -6,6 +6,9 @@ using System.Data;
 using System.Xml;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Web.UI.WebControls;
 
 namespace GoAppFront
 {
@@ -67,47 +70,68 @@ namespace GoAppFront
             venta.Id = VentaService.GetNextId("VentaProyecto");
             //Inicio Modificación - FernandoAMartinez
             foreach (ContribucionDTO dto in venta.Contribuciones)
+            {
                 dto.IdVenta = venta.Id;
+            }
             //Fin Modificación - FernandoAMartinez            
             venta.Fecha = DateTime.Now;
             venta.UsuarioId = ((UsuarioDTO)Session["Usuario"]).Id;
             VentaService.SaveOrUpdate(venta);
-            MessageBox.Show("Venta " + venta.Id.ToString() + " efectuada.\nGracias.", "Venta Efectuada");
+            MessageBox.Show("Venta " + venta.Id.ToString() + " efectuada.\n\nGracias.", "Venta Efectuada");
             
             //Rutina para serializar en XML los datos de la transacción
-            //escribirXML(sender, e);
+            escribirXML(sender, e, (List<ContribucionDTO>)Session["Carrito"]);
 
             //Se inicializa el carrito y se vuelve a la página de inicio
             Session["Carrito"] = null;
             Response.Redirect("Default.aspx");
         }
 
-        protected void escribirXML(object sender, EventArgs e)
+        protected void escribirXML(object sender, EventArgs e, List<ContribucionDTO> cont)
         {
             XmlDocument doc = new XmlDocument();
             UsuarioService UsuarioService = new UsuarioService();
             UsuarioDTO userLocal = (UsuarioDTO)Session["Usuario"];
 
             //Inicio Modificación - FernandoAMartinez
-            ////TarjetaDTO tarjeta = UsuarioService.GetCardInformation(userLocal);
-            ////string file = tarjeta.cardnumber + "_" + userLocal.UserName + ".xml";
+            TarjetaDTO tarjeta = UsuarioService.GetCardInformation(userLocal.Id);
+            //string file = tarjeta.CardNumber + "_" + userLocal.UserName + ".xml";
+            string file = "Transacciones.xml";
             //Fin Modificación - FernandoAMartinez
 
-            ////doc.Load(Server.MapPath(file));
+            doc.Load(Server.MapPath(file));
+            //Inicio Modificación - FernandoAMartinez
+            //try
+            //{
+            //    doc.Load(Server.MapPath(file));
+            //}
+            //catch (Exception ex)
+            //{
+            //    doc.Save(Server.MapPath(file));
+            //    doc.Load(Server.MapPath(file));
+            //}
+            //Fin Modificación - FernandoAMartinez
             XmlElement Venta = doc.CreateElement("Venta");
             //Nodo tarjetas
             XmlElement Tarjeta = doc.CreateElement("Tarjeta");
             XmlElement Numero = doc.CreateElement("Numero", "");
+            Numero.InnerText = tarjeta.CardNumber;
             XmlElement Desde = doc.CreateElement("Desde", "");
+            Desde.InnerText = tarjeta.Desde;
             XmlElement Hasta = doc.CreateElement("Hasta", "");
+            Hasta.InnerText = tarjeta.Hasta;
             XmlElement Importe = doc.CreateElement("Importe", "");
+            int total = 0;
+            foreach (ContribucionDTO contri in cont)
+            {
+                total += contri.Importe;
+            }
+            Importe.InnerText = "$" + total.ToString();
             //Nodo Usuario
             XmlElement Usuario = doc.CreateElement("Usuario");
             XmlElement Nombre = doc.CreateElement("Nombre", "");
-            //NombreLibro.InnerText = NombreTxt.Text;
-            //Autor.InnerText = AutorTxt.Text;
-            //Editorial.InnerText = EditorialTxt.Text;
-            //Precio.InnerText = PrecioTxt.Text;
+            Nombre.InnerText = userLocal.UserName;
+   
             Venta.AppendChild(Tarjeta);
             Tarjeta.AppendChild(Numero);
             Tarjeta.AppendChild(Desde);
@@ -117,7 +141,7 @@ namespace GoAppFront
             Usuario.AppendChild(Nombre);
 
             doc.DocumentElement.AppendChild(Venta);
-            ////doc.Save(Server.MapPath(file));
+            doc.Save(Server.MapPath(file));
         }
 
     }
